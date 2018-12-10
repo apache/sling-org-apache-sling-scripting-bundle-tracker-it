@@ -20,6 +20,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling</artifactId>
@@ -28,34 +29,53 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>org.apache.sling.scripting.bundle.tracker.it.reactor</artifactId>
+    <artifactId>org.apache.sling.scripting.examplebundle.hi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>examples/org-apache-sling-scripting-examplebundle</module>
-        <module>examples/org-apache-sling-scripting-examplebundle-precompiled</module>
-        <module>examples/org-apache-sling-scripting-examplebundle-classic</module>
-        <module>examples/org-apache-sling-scripting-examplebundle.hi</module>
-        <module>examples/org-apache-sling-scripting-examplebundle.ohhi</module>
-        <module>org-apache-sling-scripting-sightly</module>
-        <module>it</module>
-    </modules>
+    <packaging>bundle</packaging>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>scriptingbundle-maven-plugin</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>metadata</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Provide-Capability>
+                            ${org.apache.sling.scriptingbundle.maven.plugin.Provide-Capability}
+                        </Provide-Capability>
+                        <Require-Capability>
+                            osgi.extender;filter:="(&amp;(osgi.extender=sling.scripting)(version>=1.0.0)(!(version>=2.0.0)))",
+                            ${org.apache.sling.scriptingbundle.maven.plugin.Require-Capability}
+                        </Require-Capability>
+                        <Sling-Initial-Content>
+                            SLING-INF/content;overwrite:=true;path:=/content/srr/examples
+                        </Sling-Initial-Content>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
                 <configuration>
-                <excludes combine.children="append">
-                        <exclude>**/*.md</exclude>
-                        <exclude>*/target/**</exclude>
-                        <exclude>**/*.iml</exclude>
-                </excludes>
+                    <excludes>
+                        <exclude>**/extends</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
