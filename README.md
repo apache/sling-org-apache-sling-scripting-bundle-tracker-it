@@ -10,7 +10,7 @@ No matter if you want to run the integration tests or to check out the examples,
 ```
 git clone https://github.com/apache/sling-org-apache-sling-scripting-bundle-tracker.git
 cd org-apache-sling-scripting-bundle-tracker
-git submodule init
+git submodule update
 ```
 
 ### Integration Tests
