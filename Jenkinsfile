@@ -1,1 +1,2 @@
+// please rebuild
 slingOsgiBundleBuild()
