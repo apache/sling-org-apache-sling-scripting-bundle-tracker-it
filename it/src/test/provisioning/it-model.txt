@@ -23,6 +23,7 @@
 [artifacts]
   org.apache.sling/org.apache.sling.starter/12-SNAPSHOT/slingstart
   org.apache.sling/org.apache.sling.scripting.sightly
+  org.apache.sling/org.apache.sling.scripting.sightly.compiler
   org.apache.sling/org.apache.sling.scripting.bundle.tracker
   org.apache.sling/org.apache.sling.scripting.examplebundle
   org.apache.sling/org.apache.sling.scripting.examplebundle.precompiled
