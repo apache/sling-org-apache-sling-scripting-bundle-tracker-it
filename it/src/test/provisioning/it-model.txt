@@ -21,9 +21,12 @@
 
 # Dependencies
 [artifacts]
-  org.apache.sling/org.apache.sling.starter/12-SNAPSHOT/slingstart
+  org.apache.sling/org.apache.sling.starter/11/slingstart
+  org.antlr/antlr4-runtime/4.7
   org.apache.sling/org.apache.sling.scripting.sightly
+  org.apache.sling/org.apache.sling.scripting.sightly.runtime
   org.apache.sling/org.apache.sling.scripting.sightly.compiler
+  org.apache.sling/org.apache.sling.scripting.sightly.compiler.java
   org.apache.sling/org.apache.sling.scripting.bundle.tracker
   org.apache.sling/org.apache.sling.scripting.examplebundle
   org.apache.sling/org.apache.sling.scripting.examplebundle.precompiled
