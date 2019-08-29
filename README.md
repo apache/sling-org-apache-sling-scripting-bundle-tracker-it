@@ -7,13 +7,6 @@ Apache Sling Scripting Bundle Tracker Integration Tests
 
 This project provides the integration tests and some test examples for the [Apache Sling Scripting Bundle Tracker](https://github.com/apache/sling-org-apache-sling-scripting-bundle-tracker) module.
 
-### Integration Tests
-
-To run the integration tests do:
-
-```
-mvn clean verify -Pit
-```
 
 ### Example
 

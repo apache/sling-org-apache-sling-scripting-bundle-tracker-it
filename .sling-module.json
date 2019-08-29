@@ -1,3 +1,5 @@
 {
-    "mavenGoal": "verify"
+    "jenkins": {
+        "mavenGoal": "verify"
+    }
 }
