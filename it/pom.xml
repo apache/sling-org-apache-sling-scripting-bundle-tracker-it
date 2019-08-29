@@ -34,10 +34,95 @@
 
     <properties>
         <jacoco.maven.plugin.version>0.8.2</jacoco.maven.plugin.version>
+        <http.host>localhost</http.host>
+        <http.port>8080</http.port>
+        <sling.vm.options>-Xmx256m -Djava.awt.headless=true</sling.vm.options>
+        <skipTests>false</skipTests>
     </properties>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>reserve-network-port</id>
+                        <goals>
+                            <!-- pre-integration-test is too late -->
+                            <goal>reserve-network-port</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <portNames>
+                                <portName>http.port</portName>
+                            </portNames>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>@{argLine}</argLine>
+                    <skipTests>${skipTests}</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <launchpad.http.server.url>http://${http.host}:${http.port}/</launchpad.http.server.url>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent-integration</id>
+                        <goals>
+                            <goal>prepare-agent-integration</goal>
+                        </goals>
+                        <configuration>
+                            <propertyName>jacoco.agent</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>aggregate-coverage-information</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                        <configuration>
+                            <title>Apache Sling Scripting Resolver</title>
+                            <includes>
+                                <include>**/org/apache/sling/scripting/bundle/tracker/**/*.class</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <!-- the Sling instance is provisioned from the model in src/test/provisioning/it-model.txt -->
                 <groupId>org.apache.sling</groupId>
@@ -46,7 +131,43 @@
                 <extensions>true</extensions>
                 <configuration>
                     <usePomDependencies>true</usePomDependencies>
+                    <attachArtifact>false</attachArtifact>
+                    <servers>
+                        <server>
+                            <id>bundle-tracker-it-instance</id>
+                            <port>${http.port}</port>
+                            <vmOpts>${sling.vm.options} ${jacoco.agent}</vmOpts>
+                        </server>
+                    </servers>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>prepare-launchpad-package</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>prepare-package</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>build-launchpad-package</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>start-container-before-IT</id>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop-container-after-IT</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -157,98 +278,17 @@
 
     <profiles>
         <profile>
-            <id>it</id>
+            <id>example</id>
             <properties>
-                <http.host>localhost</http.host>
-                <sling.vm.options>-Xmx1024m -XX:MaxPermSize=256m -Djava.awt.headless=true</sling.vm.options>
+                <sling.vm.options>-Xmx256m -Djava.awt.headless=true -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000</sling.vm.options>
+                <skipTests>true</skipTests>
             </properties>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>reserve-network-port</id>
-                                <goals>
-                                    <!-- pre-integration-test is too late -->
-                                    <goal>reserve-network-port</goal>
-                                </goals>
-                                <phase>process-resources</phase>
-                                <configuration>
-                                    <portNames>
-                                        <portName>http.port.testing</portName>
-                                    </portNames>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <argLine>@{argLine}</argLine>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>integration-test</id>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>verify</id>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <systemPropertyVariables>
-                                <launchpad.http.server.url>http://${http.host}:${http.port.testing}/</launchpad.http.server.url>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>${jacoco.maven.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>prepare-agent-integration</id>
-                                <goals>
-                                    <goal>prepare-agent-integration</goal>
-                                </goals>
-                                <configuration>
-                                    <propertyName>jacoco.agent</propertyName>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>aggregate-coverage-information</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>report-aggregate</goal>
-                                </goals>
-                                <configuration>
-                                    <title>Apache Sling Scripting Resolver</title>
-                                    <includes>
-                                        <include>**/org/apache/sling/scripting/bundle/tracker/**/*.class</include>
-                                    </includes>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
                         <!-- the Sling instance is provisioned from the model in src/test/provisioning/it-model.txt -->
                         <groupId>org.apache.sling</groupId>
                         <artifactId>slingstart-maven-plugin</artifactId>
-                        <extensions>true</extensions>
                         <executions>
                             <execution>
                                 <id>prepare-launchpad-package</id>
@@ -275,77 +315,11 @@
                                 <goals>
                                     <goal>stop</goal>
                                 </goals>
+                                <configuration>
+                                    <shouldBlockUntilKeyIsPressed>true</shouldBlockUntilKeyIsPressed>
+                                </configuration>
                             </execution>
                         </executions>
-                        <configuration>
-                            <usePomDependencies>true</usePomDependencies>
-                            <attachArtifact>false</attachArtifact>
-                            <servers>
-                                <server>
-                                    <id>testinstance</id>
-                                    <port>${http.port.testing}</port>
-                                    <vmOpts>${sling.vm.options} ${jacoco.agent}</vmOpts>
-                                </server>
-                            </servers>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>example</id>
-            <properties>
-                <http.host>localhost</http.host>
-                <http.port>8080</http.port>
-                <sling.vm.options>-Xmx1024m -XX:MaxPermSize=256m -Djava.awt.headless=true -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000</sling.vm.options>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <!-- the Sling instance is provisioned from the model in src/test/provisioning/it-model.txt -->
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>slingstart-maven-plugin</artifactId>
-                        <version>1.7.16</version>
-                        <extensions>true</extensions>
-                        <executions>
-                            <execution>
-                                <id>prepare-launchpad-package</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>prepare-package</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>build-launchpad-package</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>package</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>start-container-before-IT</id>
-                                <goals>
-                                    <goal>start</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <goals>
-                                    <goal>stop</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <usePomDependencies>true</usePomDependencies>
-                            <attachArtifact>false</attachArtifact>
-                            <shouldBlockUntilKeyIsPressed>true</shouldBlockUntilKeyIsPressed>
-                            <servers>
-                                <server>
-                                    <id>exampleinstance</id>
-                                    <port>${http.port}</port>
-                                    <vmOpts>${sling.vm.options}</vmOpts>
-                                </server>
-                            </servers>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
