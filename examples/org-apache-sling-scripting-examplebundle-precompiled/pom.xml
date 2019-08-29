@@ -30,7 +30,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>org.apache.sling.scripting.examplebundle.precompiled</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
     <build>
@@ -38,7 +38,7 @@
             <plugin>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>scriptingbundle-maven-plugin</artifactId>
-                <version>0.1.0</version>
+                <version>0.1.1-SNAPSHOT</version>
                 <configuration>
                     <scriptsDirectory>src/main/scripts/javax.script</scriptsDirectory>
                 </configuration>
