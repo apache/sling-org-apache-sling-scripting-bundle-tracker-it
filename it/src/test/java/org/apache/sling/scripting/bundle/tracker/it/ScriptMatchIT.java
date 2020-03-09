@@ -70,18 +70,8 @@ public class ScriptMatchIT extends AbstractEndpointIT {
     }
 
     @Test
-    public void testOPTIONSMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpOptions.METHOD_NAME);
-    }
-
-    @Test
     public void testPOSTMethodMatching() throws Exception {
         testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpPost.METHOD_NAME);
-    }
-
-    @Test
-    public void testPOSTMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpPost.METHOD_NAME);
     }
 
     @Test
@@ -90,18 +80,8 @@ public class ScriptMatchIT extends AbstractEndpointIT {
     }
 
     @Test
-    public void testPATCHMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpPatch.METHOD_NAME);
-    }
-
-    @Test
     public void testPUTMethodMatching() throws Exception {
         testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpPut.METHOD_NAME);
-    }
-
-    @Test
-    public void testPUTMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpPut.METHOD_NAME);
     }
 
     @Test
@@ -110,18 +90,8 @@ public class ScriptMatchIT extends AbstractEndpointIT {
     }
 
     @Test
-    public void testDELETEMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpDelete.METHOD_NAME);
-    }
-
-    @Test
     public void testTRACEMethodMatching() throws Exception {
         testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpTrace.METHOD_NAME);
-    }
-
-    @Test
-    public void testTRACEMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpTrace.METHOD_NAME);
     }
 
     @Test
