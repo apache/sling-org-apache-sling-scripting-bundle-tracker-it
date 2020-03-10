@@ -39,9 +39,6 @@
                 <groupId>org.apache.sling</groupId>
                 <artifactId>scriptingbundle-maven-plugin</artifactId>
                 <version>0.1.1-SNAPSHOT</version>
-                <configuration>
-                    <scriptsDirectory>src/main/scripts/javax.script</scriptsDirectory>
-                </configuration>
                 <executions>
                     <execution>
                         <phase>prepare-package</phase>
@@ -84,7 +81,6 @@
                         </goals>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <sourceDirectory>src/main/scripts/javax.script</sourceDirectory>
                             <generateJavaClasses>true</generateJavaClasses>
                         </configuration>
                     </execution>
