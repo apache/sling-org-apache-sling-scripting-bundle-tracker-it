@@ -60,7 +60,7 @@ public class ScriptMatchIT extends AbstractEndpointIT {
         HttpResponse response = getResponse(HttpHead.METHOD_NAME, "/content/srr/examples/script-matching.selector-1.html", 200);
         Header[] header = response.getHeaders("X-Script-Name");
         assertEquals("Expected to find one X-Script-Name header.", 1, header.length);
-        assertEquals("/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/HEAD.selector-1.html",
+        assertEquals("/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/selector-1.HEAD.html",
                 header[0].getValue());
     }
 
@@ -70,8 +70,18 @@ public class ScriptMatchIT extends AbstractEndpointIT {
     }
 
     @Test
+    public void testOPTIONSMethodSelectorMatching() throws Exception {
+        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpOptions.METHOD_NAME);
+    }
+
+    @Test
     public void testPOSTMethodMatching() throws Exception {
         testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpPost.METHOD_NAME);
+    }
+
+    @Test
+    public void testPOSTMethodSelectorMatching() throws Exception {
+        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpPost.METHOD_NAME);
     }
 
     @Test
@@ -80,8 +90,18 @@ public class ScriptMatchIT extends AbstractEndpointIT {
     }
 
     @Test
+    public void testPATCHMethodSelectorMatching() throws Exception {
+        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpPatch.METHOD_NAME);
+    }
+
+    @Test
     public void testPUTMethodMatching() throws Exception {
         testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpPut.METHOD_NAME);
+    }
+
+    @Test
+    public void testPUTMethodSelectorMatching() throws Exception {
+        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpPut.METHOD_NAME);
     }
 
     @Test
@@ -90,8 +110,18 @@ public class ScriptMatchIT extends AbstractEndpointIT {
     }
 
     @Test
+    public void testDELETEMethodSelectorMatching() throws Exception {
+        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpDelete.METHOD_NAME);
+    }
+
+    @Test
     public void testTRACEMethodMatching() throws Exception {
         testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpTrace.METHOD_NAME);
+    }
+
+    @Test
+    public void testTRACEMethodSelectorMatching() throws Exception {
+        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpTrace.METHOD_NAME);
     }
 
     @Test
@@ -115,8 +145,8 @@ public class ScriptMatchIT extends AbstractEndpointIT {
         } else {
             throw new IllegalArgumentException("The following URL doesn't seem to be correctly handled: " + url);
         }
-        String expectedScriptName = "/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/" + httpMethod +
-                (StringUtils.isNotEmpty(selectorString) ? "." + selectorString : "") + "." + extension;
+        String expectedScriptName = "/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/" +
+                (StringUtils.isNotEmpty(selectorString) ? selectorString + "." : "") + httpMethod + "." + extension;
         assertTrue(document.select("div").html().contains(expectedScriptName));
     }
 
