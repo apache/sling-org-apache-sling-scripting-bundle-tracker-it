@@ -51,7 +51,7 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
 
-public abstract class AbstractEndpointIT {
+public abstract class AbstractEndpointTestBase {
 
     protected int contentFindTimeout = 20000;
     protected int contentFindRetryDelay = 1000;

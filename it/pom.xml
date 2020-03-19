@@ -78,6 +78,9 @@
                         <goals>
                             <goal>integration-test</goal>
                         </goals>
+                        <configuration>
+                            <runOrder>alphabetical</runOrder>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>verify</id>

@@ -20,7 +20,7 @@ import org.jsoup.nodes.Document;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class EndpointIT extends AbstractEndpointIT {
+public class EndpointIT extends AbstractEndpointTestBase {
 
     @Test
     public void testHelloEndpoint() throws Exception {
