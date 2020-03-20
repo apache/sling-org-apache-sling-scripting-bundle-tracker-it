@@ -56,7 +56,7 @@ import org.junit.ClassRule;
 
 public abstract class AbstractEndpointTestBase {
 
-    protected int contentFindTimeout = 20000;
+    protected int contentFindTimeout = 3000;
     protected int contentFindRetryDelay = 1000;
     private static CloseableHttpClient httpClient;
 
@@ -102,7 +102,7 @@ public abstract class AbstractEndpointTestBase {
             document = Jsoup.parse(response.getEntity().getContent(), StandardCharsets.UTF_8.name(),
                     System.getProperty(ITCustomizer.BASE_URL_PROP, ITCustomizer.BASE_URL_PROP +
                             "_IS_NOT_SET"));
-            documentMap.put(httpMethod + ":" + uri, document);
+            documentMap.put(httpMethod + ":" + uri.toString(), document);
         }
         return document;
     }
