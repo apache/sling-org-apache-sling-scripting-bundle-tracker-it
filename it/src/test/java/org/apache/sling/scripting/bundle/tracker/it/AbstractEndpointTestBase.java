@@ -18,21 +18,17 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 package org.apache.sling.scripting.bundle.tracker.it;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpGet;`
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.client.methods.HttpOptions;
 import org.apache.http.client.methods.HttpPatch;
@@ -42,15 +38,12 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpTrace;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.sling.junit.teleporter.customizers.ITCustomizer;
+import org.apache.sling.testing.clients.SlingHttpResponse;
 import org.apache.sling.testing.junit.rules.SlingInstanceRule;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
 
@@ -58,7 +51,6 @@ public abstract class AbstractEndpointTestBase {
 
     protected int contentFindTimeout = 3000;
     protected int contentFindRetryDelay = 1000;
-    private static CloseableHttpClient httpClient;
 
     @ClassRule
     public static final SlingInstanceRule SLING_INSTANCE_RULE = new SlingInstanceRule();
@@ -69,16 +61,6 @@ public abstract class AbstractEndpointTestBase {
 
     private Map<String, Document> documentMap = new ConcurrentHashMap<>();
     private Set<String> resourceAlreadyPresent = Collections.synchronizedSet(new HashSet<>());
-
-    @BeforeClass
-    public static void setUp() {
-        httpClient = HttpClientBuilder.create().build();
-    }
-
-    @AfterClass
-    public static void tearDown() throws IOException {
-        httpClient.close();
-    }
 
     /**
      * Retrieves a jsoup Document from the passed {@code url}. The URL can contain selectors and extensions, but it has to identify a Sling
@@ -98,8 +80,8 @@ public abstract class AbstractEndpointTestBase {
         URI uri = uriBuilder.build();
         Document document = documentMap.get(httpMethod + ":" + uri.toString());
         if (document == null) {
-            HttpResponse response = getResponse(httpMethod, url);
-            document = Jsoup.parse(response.getEntity().getContent(), StandardCharsets.UTF_8.name(),
+            SlingHttpResponse response = getResponse(httpMethod, url);
+            document = Jsoup.parse(response.getContent(),
                     System.getProperty(ITCustomizer.BASE_URL_PROP, ITCustomizer.BASE_URL_PROP +
                             "_IS_NOT_SET"));
             documentMap.put(httpMethod + ":" + uri.toString(), document);
@@ -107,15 +89,14 @@ public abstract class AbstractEndpointTestBase {
         return document;
     }
 
-    protected HttpResponse getResponse(String method, String url, NameValuePair... parameters) throws Exception {
+    protected SlingHttpResponse getResponse(String method, String url, NameValuePair... parameters) throws Exception {
         String resourcePath = url.substring(0, url.indexOf('.'));
         if (!resourceAlreadyPresent.contains(resourcePath)) {
             SLING_INSTANCE_RULE.getAdminClient().waitExists(resourcePath, contentFindTimeout, contentFindRetryDelay);
             resourceAlreadyPresent.add(resourcePath);
         }
         HttpUriRequest request = prepareRequest(method, url, parameters);
-        HttpResponse response = httpClient.execute(request);
-        Assert.assertNotNull(response);
+        SlingHttpResponse response = SLING_INSTANCE_RULE.getAdminClient().doRequest(request, Collections.emptyList());
         Assert.assertEquals("URL " + url + " did not return a 200 status code.", 200, response.getStatusLine().getStatusCode());
         return response;
     }
