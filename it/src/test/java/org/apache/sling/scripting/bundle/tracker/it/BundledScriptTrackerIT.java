@@ -20,10 +20,15 @@ import javax.servlet.Servlet;
 
 import org.apache.sling.junit.rules.TeleporterRule;
 import org.apache.sling.testing.clients.util.poller.Polling;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class BundledScriptTrackerIT {
+
+    @ClassRule
+    public static final LaunchpadReadyRule LAUNCHPAD_READY_RULE = new LaunchpadReadyRule(Integer.getInteger("launchpad.http.server.port",
+            8080));
 
     @Rule
     public TeleporterRule teleporter = TeleporterRule.forClass(getClass(), "IT");

@@ -49,7 +49,7 @@ public class ScriptMatchIT extends AbstractEndpointTestBase {
 
     @Test
     public void testHEADMethodMatching() throws Exception {
-        HttpResponse response = getResponse(HttpHead.METHOD_NAME, "/content/srr/examples/script-matching.html", 200);
+        HttpResponse response = getResponse(HttpHead.METHOD_NAME, "/content/srr/examples/script-matching.html");
         Header[] header = response.getHeaders("X-Script-Name");
         assertEquals("Expected to find one X-Script-Name header.", 1, header.length);
         assertEquals("/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/HEAD.html", header[0].getValue());
@@ -57,7 +57,7 @@ public class ScriptMatchIT extends AbstractEndpointTestBase {
 
     @Test
     public void testHEADMethodSelectorMatching() throws Exception {
-        HttpResponse response = getResponse(HttpHead.METHOD_NAME, "/content/srr/examples/script-matching.selector-1.html", 200);
+        HttpResponse response = getResponse(HttpHead.METHOD_NAME, "/content/srr/examples/script-matching.selector-1.html");
         Header[] header = response.getHeaders("X-Script-Name");
         assertEquals("Expected to find one X-Script-Name header.", 1, header.length);
         assertEquals("/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/selector-1.HEAD.html",
@@ -136,7 +136,7 @@ public class ScriptMatchIT extends AbstractEndpointTestBase {
         String path = url.substring(url.lastIndexOf('/'));
         String[] parts = path.split("\\.");
         String selectorString = null;
-        String extension = null;
+        String extension;
         if (parts.length == 3) {
             selectorString = parts[1];
             extension = parts[2];

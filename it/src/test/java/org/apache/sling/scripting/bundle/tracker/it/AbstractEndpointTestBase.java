@@ -22,7 +22,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.http.HttpResponse;
@@ -60,7 +63,12 @@ public abstract class AbstractEndpointTestBase {
     @ClassRule
     public static final SlingInstanceRule SLING_INSTANCE_RULE = new SlingInstanceRule();
 
+    @ClassRule
+    public static final LaunchpadReadyRule LAUNCHPAD_READY_RULE = new LaunchpadReadyRule(Integer.getInteger("launchpad.http.server.port",
+            8080));
+
     private Map<String, Document> documentMap = new ConcurrentHashMap<>();
+    private Set<String> resourceAlreadyPresent = Collections.synchronizedSet(new HashSet<>());
 
     @BeforeClass
     public static void setUp() {
@@ -90,7 +98,7 @@ public abstract class AbstractEndpointTestBase {
         URI uri = uriBuilder.build();
         Document document = documentMap.get(httpMethod + ":" + uri.toString());
         if (document == null) {
-            HttpResponse response = getResponse(httpMethod, url, 200);
+            HttpResponse response = getResponse(httpMethod, url);
             document = Jsoup.parse(response.getEntity().getContent(), StandardCharsets.UTF_8.name(),
                     System.getProperty(ITCustomizer.BASE_URL_PROP, ITCustomizer.BASE_URL_PROP +
                             "_IS_NOT_SET"));
@@ -99,15 +107,16 @@ public abstract class AbstractEndpointTestBase {
         return document;
     }
 
-    protected HttpResponse getResponse(String method, String url, int statusCode, NameValuePair... parameters) throws Exception {
+    protected HttpResponse getResponse(String method, String url, NameValuePair... parameters) throws Exception {
         String resourcePath = url.substring(0, url.indexOf('.'));
-        SLING_INSTANCE_RULE.getAdminClient().waitExists(resourcePath, contentFindTimeout, contentFindRetryDelay);
+        if (!resourceAlreadyPresent.contains(resourcePath)) {
+            SLING_INSTANCE_RULE.getAdminClient().waitExists(resourcePath, contentFindTimeout, contentFindRetryDelay);
+            resourceAlreadyPresent.add(resourcePath);
+        }
         HttpUriRequest request = prepareRequest(method, url, parameters);
         HttpResponse response = httpClient.execute(request);
         Assert.assertNotNull(response);
-        Assert.assertEquals("URL " + url + " did not return a " + statusCode + " status code.", statusCode,
-                response.getStatusLine().getStatusCode
-                        ());
+        Assert.assertEquals("URL " + url + " did not return a 200 status code.", 200, response.getStatusLine().getStatusCode());
         return response;
     }
 

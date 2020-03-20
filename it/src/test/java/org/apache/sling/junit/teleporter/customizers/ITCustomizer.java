@@ -28,7 +28,7 @@ public class ITCustomizer implements TeleporterRule.Customizer {
         final ClientSideTeleporter cst = (ClientSideTeleporter)t;
         cst.setBaseUrl(System.getProperty(BASE_URL_PROP, BASE_URL_PROP + "_IS_NOT_SET"));
         cst.setServerCredentials("admin", "admin");
-        cst.includeDependencyPrefix("org.apache.sling.scripting.resolver.internal");
+        cst.includeDependencyPrefix("org.apache.sling.scripting.bundle.tracker.it");
         cst.includeDependencyPrefix("org.apache.sling.testing");
         cst.setTestReadyTimeoutSeconds(20);
     }
