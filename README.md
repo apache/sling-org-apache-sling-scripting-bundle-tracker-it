@@ -10,7 +10,7 @@ This project provides the integration tests and some test examples for the [Apac
 
 ### Example
 
-To play around with a sling instance on localhost port 8080 (override with -Dhttp.port=<port>) that has the [examples](./tree/master/examples) installed run:
+To play around with a sling instance on localhost port 8080 (override with -Dhttp.port=<port>) that has the [examples](https://github.com/apache/sling-org-apache-sling-scripting-bundle-tracker-it/tree/master/examples) installed run:
 
 ```
 mvn clean verify -Pexample
