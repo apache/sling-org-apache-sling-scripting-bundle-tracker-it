@@ -42,8 +42,8 @@
                 <configuration>
                     <instructions>
                         <Sling-Initial-Content>
-                            SLING-INF/content;overwrite:=true;path:=/content/srr/examples,
-                            SLING-INF/apps/assr;overwrite:=true;path:=/apps/assr,
+                            SLING-INF/content;overwrite:=true;path:=/content/bundled-scripts/examplebundle-classic,
+                            SLING-INF/apps/sling/scripting/examplebundle-classic;overwrite:=true;path:=/apps/sling/scripting/examplebundle-classic
                         </Sling-Initial-Content>
                     </instructions>
                 </configuration>

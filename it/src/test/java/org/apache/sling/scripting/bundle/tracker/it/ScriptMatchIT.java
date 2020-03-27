@@ -36,20 +36,22 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ScriptMatchIT extends AbstractEndpointTestBase {
+    
+    private static final String SCRIPT_MATCHING_BASE = BASE + "/examplebundle/script-matching";
 
     @Test
     public void testGETMethodMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpGet.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".html", HttpGet.METHOD_NAME);
     }
 
     @Test
     public void testGETMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpGet.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".selector-1.html", HttpGet.METHOD_NAME);
     }
 
     @Test
     public void testHEADMethodMatching() throws Exception {
-        HttpResponse response = getResponse(HttpHead.METHOD_NAME, "/content/srr/examples/script-matching.html");
+        HttpResponse response = getResponse(HttpHead.METHOD_NAME, SCRIPT_MATCHING_BASE + ".html");
         Header[] header = response.getHeaders("X-Script-Name");
         assertEquals("Expected to find one X-Script-Name header.", 1, header.length);
         assertEquals("/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/HEAD.html", header[0].getValue());
@@ -57,7 +59,7 @@ public class ScriptMatchIT extends AbstractEndpointTestBase {
 
     @Test
     public void testHEADMethodSelectorMatching() throws Exception {
-        HttpResponse response = getResponse(HttpHead.METHOD_NAME, "/content/srr/examples/script-matching.selector-1.html");
+        HttpResponse response = getResponse(HttpHead.METHOD_NAME, SCRIPT_MATCHING_BASE + ".selector-1.html");
         Header[] header = response.getHeaders("X-Script-Name");
         assertEquals("Expected to find one X-Script-Name header.", 1, header.length);
         assertEquals("/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/selector-1.HEAD.html",
@@ -66,67 +68,67 @@ public class ScriptMatchIT extends AbstractEndpointTestBase {
 
     @Test
     public void testOPTIONSMethodMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpOptions.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".html", HttpOptions.METHOD_NAME);
     }
 
     @Test
     public void testOPTIONSMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpOptions.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".selector-1.html", HttpOptions.METHOD_NAME);
     }
 
     @Test
     public void testPOSTMethodMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpPost.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".html", HttpPost.METHOD_NAME);
     }
 
     @Test
     public void testPOSTMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpPost.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".selector-1.html", HttpPost.METHOD_NAME);
     }
 
     @Test
     public void testPATCHMethodMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpPatch.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".html", HttpPatch.METHOD_NAME);
     }
 
     @Test
     public void testPATCHMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpPatch.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".selector-1.html", HttpPatch.METHOD_NAME);
     }
 
     @Test
     public void testPUTMethodMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpPut.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".html", HttpPut.METHOD_NAME);
     }
 
     @Test
     public void testPUTMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpPut.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".selector-1.html", HttpPut.METHOD_NAME);
     }
 
     @Test
     public void testDELETEMethodMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpDelete.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".html", HttpDelete.METHOD_NAME);
     }
 
     @Test
     public void testDELETEMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpDelete.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".selector-1.html", HttpDelete.METHOD_NAME);
     }
 
     @Test
     public void testTRACEMethodMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.html", HttpTrace.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".html", HttpTrace.METHOD_NAME);
     }
 
     @Test
     public void testTRACEMethodSelectorMatching() throws Exception {
-        testHttpMethodScriptMatching("/content/srr/examples/script-matching.selector-1.html", HttpTrace.METHOD_NAME);
+        testHttpMethodScriptMatching(SCRIPT_MATCHING_BASE + ".selector-1.html", HttpTrace.METHOD_NAME);
     }
 
     @Test
     public void testSelectorMatching() throws Exception {
-        Document document = getDocument("/content/srr/examples/script-matching.selector-2.html");
+        Document document = getDocument(SCRIPT_MATCHING_BASE + ".selector-2.html");
         assertTrue(document.select("div").html().contains("/javax.script/org.apache.sling.scripting.examplebundle" +
                 ".scriptmatching/1.0.0/selector-2.html"));
     }

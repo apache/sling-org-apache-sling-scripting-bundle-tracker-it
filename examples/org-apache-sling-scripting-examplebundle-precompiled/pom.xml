@@ -63,7 +63,7 @@
                             ${org.apache.sling.scriptingbundle.maven.plugin.Require-Capability}
                         </Require-Capability>
                         <Sling-Initial-Content>
-                            SLING-INF/content;overwrite:=true;path:=/content/srr/examples
+                            SLING-INF/content;overwrite:=true;path:=/content/bundled-scripts/examplebundle-precompiled
                         </Sling-Initial-Content>
                         <Sling-ResourceType-Precompiled>true</Sling-ResourceType-Precompiled>
                     </instructions>

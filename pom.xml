@@ -34,10 +34,11 @@
 
     <modules>
         <module>examples/org-apache-sling-scripting-examplebundle</module>
-        <module>examples/org-apache-sling-scripting-examplebundle-precompiled</module>
         <module>examples/org-apache-sling-scripting-examplebundle-classic</module>
-        <module>examples/org-apache-sling-scripting-examplebundle.hi</module>
-        <module>examples/org-apache-sling-scripting-examplebundle.ohhi</module>
+        <module>examples/org-apache-sling-scripting-examplebundle-extend1</module>
+        <module>examples/org-apache-sling-scripting-examplebundle-extend2</module>
+        <module>examples/org-apache-sling-scripting-examplebundle-precompiled</module>
+        <module>examples/org-apache-sling-scripting-examplebundle-precompiled-jsp</module>
         <module>it</module>
     </modules>
 

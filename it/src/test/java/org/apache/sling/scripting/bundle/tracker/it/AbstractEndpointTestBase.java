@@ -38,7 +38,6 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpTrace;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.sling.junit.teleporter.customizers.ITCustomizer;
 import org.apache.sling.testing.clients.SlingHttpResponse;
 import org.apache.sling.testing.junit.rules.SlingInstanceRule;
 import org.jsoup.Jsoup;
@@ -51,6 +50,8 @@ public abstract class AbstractEndpointTestBase {
 
     protected int contentFindTimeout = 3000;
     protected int contentFindRetryDelay = 1000;
+    protected static final String BASE = "/content/bundled-scripts";
+    protected static final String DATA_RT_ATTRIBUTE = "data-rt";
 
     @ClassRule
     public static final SlingInstanceRule SLING_INSTANCE_RULE = new SlingInstanceRule();
@@ -82,8 +83,7 @@ public abstract class AbstractEndpointTestBase {
         if (document == null) {
             SlingHttpResponse response = getResponse(httpMethod, url);
             document = Jsoup.parse(response.getContent(),
-                    System.getProperty(ITCustomizer.BASE_URL_PROP, ITCustomizer.BASE_URL_PROP +
-                            "_IS_NOT_SET"));
+                    System.getProperty("launchpad.http.server.url", "launchpad.http.server.url IS_NOT_SET"));
             documentMap.put(httpMethod + ":" + uri.toString(), document);
         }
         return document;
@@ -104,7 +104,7 @@ public abstract class AbstractEndpointTestBase {
     protected HttpUriRequest prepareRequest(String method, String url, NameValuePair... parameters) throws URISyntaxException {
         HttpRequestBase request = null;
         URIBuilder uriBuilder =
-                new URIBuilder(System.getProperty(ITCustomizer.BASE_URL_PROP, ITCustomizer.BASE_URL_PROP + "_IS_NOT_SET") + url);
+                new URIBuilder(System.getProperty("launchpad.http.server.url", "launchpad.http.server.url IS_NOT_SET") + url);
         uriBuilder.setParameters(parameters);
         switch (method) {
             case HttpGet.METHOD_NAME:

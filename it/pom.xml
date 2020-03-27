@@ -178,13 +178,19 @@
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.scripting.bundle.tracker</artifactId>
             <version>0.1.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.commons.compiler</artifactId>
             <version>2.3.7-SNAPSHOT</version>
-            <scope>provided</scope>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.scripting.jsp</artifactId>
+            <version>2.5.0-SNAPSHOT</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
@@ -230,25 +236,31 @@
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.scripting.examplebundle.precompiled</artifactId>
-            <version>0.1.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.scripting.examplebundle.classic</artifactId>
             <version>0.1.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.scripting.examplebundle.hi</artifactId>
+            <artifactId>org.apache.sling.scripting.examplebundle.extend1</artifactId>
             <version>0.1.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.scripting.examplebundle.ohhi</artifactId>
+            <artifactId>org.apache.sling.scripting.examplebundle.extend2</artifactId>
+            <version>0.1.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.scripting.examplebundle.precompiled</artifactId>
+            <version>0.1.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.scripting.examplebundle.precompiled.jsp</artifactId>
             <version>0.1.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
@@ -259,14 +271,13 @@
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.junit.teleporter</artifactId>
-            <version>1.0.18</version>
+            <artifactId>org.apache.sling.testing.clients</artifactId>
+            <version>1.2.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.testing.clients</artifactId>
-            <version>1.2.6</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

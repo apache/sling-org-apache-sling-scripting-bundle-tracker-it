@@ -4,11 +4,12 @@ Examples
 Because some code is worth a thousand words...
 
 The examples provided by the project also serve as integration tests, therefore they should always work and be relatively up-to-date.
-Two bundles showcase how the [`org.apache.sling.scripting.bundle.tracker`](https://github.com/apache/sling-org-apache-sling-scripting-bundle-tracker/tree/master/README.md) works and how you can
+Four bundles showcase how the [`org.apache.sling.scripting.bundle.tracker`](https://github.com/apache/sling-org-apache-sling-scripting-bundle-tracker/tree/master/README.md) works and how you can
 package your scripts into OSGi bundles:
 
   1. [`org.apache.sling.scripting.examplebundle`](./org-apache-sling-scripting-examplebundle):
     * provides the `org.apache.sling.scripting.examplebundle.hello` resource type
+    * its scripts are packed as is and compiled on the platform
     * the resource type is provided in two versions (`1.0.0` and `2.0.0`)
     * it has a main script (`hello.html`) and some selector scripts
     * initial content is available at:
