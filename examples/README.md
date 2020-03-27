@@ -3,8 +3,8 @@ Examples
 
 Because some code is worth a thousand words...
 
-The examples provided by the project also serve as integration tests, therefore they should always work and be relatively up-to-date.
-Four bundles showcase how the [`org.apache.sling.scripting.bundle.tracker`](https://github.com/apache/sling-org-apache-sling-scripting-bundle-tracker/tree/master/README.md).
+The examples provided by the project also serve as integration tests and therefore they should always work and be relatively up-to-date.
+The bundles in this folder showcase how the [`org.apache.sling.scripting.bundle.tracker`](https://github.com/apache/sling-org-apache-sling-scripting-bundle-tracker/tree/master/README.md).
 
 All the test endpoints will be in the resource tree under the `/content/bundled-scripts/` folder.
 
