@@ -78,4 +78,15 @@ public class ExampleBundlePrecompiledIT extends AbstractEndpointTestBase {
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
     }
+
+    @Test
+    public void testPathBasedServlet() throws Exception {
+        final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.pathcaller";
+        final String callee = ("apps.org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__path" +
+                ".path__002d__script__002e__html");
+        Document document = getDocument(ROOT + "/path-based-servlet.html");
+        assertEquals(expectedRT, document.select("h2").html());
+        assertEquals("Cannot detect callee script which is supposed to be a path based servlet.", callee,
+                document.select("div.caller > span.script").html());
+    }
 }

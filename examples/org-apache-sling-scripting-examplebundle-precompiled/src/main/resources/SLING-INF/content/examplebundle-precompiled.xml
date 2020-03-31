@@ -44,3 +44,12 @@
         <type>String</type>
     </property>
 </node>
+<node>
+    <name>path-based-servlet</name>
+    <primaryNodeType>nt:unstructured</primaryNodeType>
+    <property>
+        <name>sling:resourceType</name>
+        <value>org.apache.sling.scripting.examplebundle.precompiled.pathcaller</value>
+        <type>String</type>
+    </property>
+</node>
