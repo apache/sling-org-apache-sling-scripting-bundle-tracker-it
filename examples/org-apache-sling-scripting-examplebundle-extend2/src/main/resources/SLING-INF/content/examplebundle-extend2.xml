@@ -53,3 +53,12 @@
         <type>String</type>
     </property>
 </node>
+<node>
+<name>three</name>
+<primaryNodeType>nt:unstructured</primaryNodeType>
+<property>
+    <name>sling:resourceType</name>
+    <value>org.apache.sling.scripting.examplebundle.extend2.three</value>
+    <type>String</type>
+</property>
+</node>

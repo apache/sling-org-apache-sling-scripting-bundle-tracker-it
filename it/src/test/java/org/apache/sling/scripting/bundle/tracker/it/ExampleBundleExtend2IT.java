@@ -103,4 +103,22 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
     }
+
+    @Test
+    public void testThree() throws Exception {
+        final String expectedRT = "org.apache.sling.scripting.examplebundle.extend2.three";
+
+        Document document = getDocument(ROOT + "/three.html");
+        assertEquals(expectedRT, document.select("h2").html());
+
+        Elements h = document.select("#h-extend2-three");
+        assertEquals("Resource based servlet resolution failed.", 1, h.size());
+        assertEquals("Hello", h.html());
+        assertEquals(expectedRT, h.attr(DATA_RT_ATTRIBUTE));
+
+        Elements w = document.select("#w-examplebundle-hello");
+        assertEquals("The w.html script should have been provided by sling/scripting/examplebundle/hello", 1, w.size());
+        assertEquals("World", w.html());
+        assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
+    }
 }
