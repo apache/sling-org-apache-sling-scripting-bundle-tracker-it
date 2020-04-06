@@ -52,6 +52,7 @@ public abstract class AbstractEndpointTestBase {
     protected int contentFindRetryDelay = 1000;
     protected static final String BASE = "/content/bundled-scripts";
     protected static final String DATA_RT_ATTRIBUTE = "data-rt";
+    protected static final String DATA_SCRIPT = "data-script";
 
     @ClassRule
     public static final SlingInstanceRule SLING_INSTANCE_RULE = new SlingInstanceRule();

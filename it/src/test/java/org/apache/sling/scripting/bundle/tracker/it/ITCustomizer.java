@@ -34,7 +34,5 @@ public class ITCustomizer implements TeleporterRule.Customizer {
         cst.includeDependencyPrefix("org.ops4j.pax.tinybundles");
         cst.includeDependencyPrefix("org.apache.sling.scripting.bundle.tracker.it");
         cst.setTestReadyTimeoutSeconds(20);
-        cst.setPreventToUninstallBundle(true);
-        cst.setEnableLogging(true);
     }
 }

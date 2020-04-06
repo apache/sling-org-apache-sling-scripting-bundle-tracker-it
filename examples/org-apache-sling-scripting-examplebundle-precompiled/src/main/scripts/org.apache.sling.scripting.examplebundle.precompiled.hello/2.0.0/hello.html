@@ -16,7 +16,7 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
-<h2>${resource.resourceType}</h2>
+<h2 data-script="${javax_script_filename}">${resource.resourceType}</h2>
 <sly data-sly-include="h.html"/> <sly data-sly-include="w.html"/>
 <div data-sly-use.slingSettings="org.apache.sling.settings.SlingSettingsService"
      data-sly-test.slingId="${slingSettings.slingId}"

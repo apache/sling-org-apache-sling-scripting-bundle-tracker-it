@@ -18,5 +18,5 @@
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--%>
 <%@page session="false" pageEncoding="utf-8"%>
 <%@taglib prefix="sling" uri="http://sling.apache.org/taglibs/sling/1.2"%>
-<h2>${resource.resourceType}</h2>
+<h2 data-script="${javax_script_filename}">${resource.resourceType}</h2>
 <sling:call script="h.jsp"/><sling:call script="w.jsp"/>

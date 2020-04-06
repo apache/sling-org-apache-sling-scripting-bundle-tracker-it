@@ -23,6 +23,7 @@ import org.jsoup.select.Elements;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ExampleBundlePrecompiledJSPIT extends AbstractEndpointTestBase {
 
@@ -32,7 +33,10 @@ public class ExampleBundlePrecompiledJSPIT extends AbstractEndpointTestBase {
     public void testHello() throws Exception {
         final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.jsp.hello";
         Document document = getDocument(ROOT + "/hello.html");
-        assertEquals(expectedRT, document.select("h2").html());
+        Elements h2 = document.select("h2");
+        assertEquals(expectedRT, h2.html());
+        final String expectedScriptDriver = "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__jsp__002e__hello.hello__002e__jsp";
+        assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-precompiled-jsp");
         assertEquals("Resource based servlet resolution failed.", 1, h.size());

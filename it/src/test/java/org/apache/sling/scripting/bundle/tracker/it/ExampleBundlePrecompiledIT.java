@@ -23,6 +23,7 @@ import org.jsoup.select.Elements;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ExampleBundlePrecompiledIT extends AbstractEndpointTestBase {
 
@@ -32,7 +33,10 @@ public class ExampleBundlePrecompiledIT extends AbstractEndpointTestBase {
     public void testHello() throws Exception {
         final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.hello/2.0.0";
         Document document = getDocument(ROOT + "/hello.html");
-        assertEquals(expectedRT, document.select("h2").html());
+        Elements h2 = document.select("h2");
+        assertEquals(expectedRT, h2.html());
+        final String expectedScriptDriver = "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__hello.__0032____002e__0__002e__0.hello__002e__html";
+        assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-precompiled-2");
         assertEquals("Resource based servlet resolution failed.", 1, h.size());
@@ -49,7 +53,10 @@ public class ExampleBundlePrecompiledIT extends AbstractEndpointTestBase {
     public void testHelloV2() throws Exception {
         final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.hello/2.0.0";
         Document document = getDocument(ROOT + "/hello-v2.html");
-        assertEquals(expectedRT, document.select("h2").html());
+        Elements h2 = document.select("h2");
+        assertEquals(expectedRT, h2.html());
+        final String expectedScriptDriver = "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__hello.__0032____002e__0__002e__0.hello__002e__html";
+        assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-precompiled-2");
         assertEquals("Resource based servlet resolution failed.", 1, h.size());
@@ -66,7 +73,11 @@ public class ExampleBundlePrecompiledIT extends AbstractEndpointTestBase {
     public void testHelloV1() throws Exception {
         final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0";
         Document document = getDocument(ROOT + "/hello-v1.html");
-        assertEquals(expectedRT, document.select("h2").html());
+        Elements h2 = document.select("h2");
+        assertEquals(expectedRT, h2.html());
+        final String expectedScriptDriver =
+                "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__hello.__0031____002e__0__002e__0.hello__002e__html";
+        assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-precompiled-1");
         assertEquals("Resource based servlet resolution failed.", 1, h.size());
@@ -85,7 +96,11 @@ public class ExampleBundlePrecompiledIT extends AbstractEndpointTestBase {
         final String callee = ("apps.org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__path" +
                 ".path__002d__script__002e__html");
         Document document = getDocument(ROOT + "/path-based-servlet.html");
-        assertEquals(expectedRT, document.select("h2").html());
+        Elements h2 = document.select("h2");
+        assertEquals(expectedRT, h2.html());
+        final String expectedScriptDriver =
+                "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__pathcaller.pathcaller__002e__html";
+        assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
         assertEquals("Cannot detect callee script which is supposed to be a path based servlet.", callee,
                 document.select("div.caller > span.script").html());
     }

@@ -69,9 +69,9 @@ public class ExampleBundleExtend2TeleportedIT extends AbstractTeleportedTestBase
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
-                    "h.html",
-                    "h.html.servlet",
-                    "html.servlet"
+                    "html.servlet",
+                    "two.html",
+                    "two.html.servlet"
             );
             assertEquals(expectedChildren, children.keySet());
 
