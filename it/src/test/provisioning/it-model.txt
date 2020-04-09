@@ -22,6 +22,7 @@
 # Dependencies
 [artifacts]
   org.apache.sling/org.apache.sling.starter/12-SNAPSHOT/slingstart
+  org.apache.sling/org.apache.sling.scripting.core
   org.apache.sling/org.apache.sling.scripting.jsp
   org.apache.sling/org.apache.sling.scripting.sightly
   org.apache.sling/org.apache.sling.scripting.sightly.runtime

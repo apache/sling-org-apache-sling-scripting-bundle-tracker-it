@@ -76,6 +76,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/extends</exclude>
+                        <exclude>**/requires</exclude>
                     </excludes>
                 </configuration>
             </plugin>

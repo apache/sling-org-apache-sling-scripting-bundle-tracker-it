@@ -42,7 +42,7 @@ public class ExampleBundlePrecompiledTeleportedIT extends AbstractTeleportedTest
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(7, children.size());
+            assertEquals(9, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
@@ -52,7 +52,9 @@ public class ExampleBundlePrecompiledTeleportedIT extends AbstractTeleportedTest
                     "w.html.servlet",
                     "hello.html",
                     "hello.html.servlet",
-                    "html.servlet"
+                    "html.servlet",
+                    "templates.html",
+                    "templates.html.servlet"
             );
             assertEquals(expectedChildren, children.keySet());
 

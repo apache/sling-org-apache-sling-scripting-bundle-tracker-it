@@ -18,3 +18,12 @@
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
 <h2 data-script="${javax_script_filename}">${resource.resourceType}</h2>
 <sly data-sly-include="h.html"/> <sly data-sly-include="w.html"/>
+<sly data-sly-use.twoTemplates="two-templates.html" data-sly-call="${twoTemplates.two}"></sly>
+<div class="inherited" data-sly-use.inheritedTemplates="templates.html"
+       data-sly-call="${inheritedTemplates.precompiled1Template @ name ='John Doe'}"></div>
+<div class="absolute-path-1"
+     data-sly-use.absolutePathTemplates1="/org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/templates.html"
+     data-sly-call="${absolutePathTemplates1.precompiled1Template @ name ='John Doe'}"></div>
+<div class="absolute-path-2"
+     data-sly-use.absolutePathTemplates2="/apps/sling/scripting/examplebundle/hello/templates.html"
+     data-sly-call="${absolutePathTemplates2.exampledBundleAppsHello @ name = 'Jack Schitt'}"></div>

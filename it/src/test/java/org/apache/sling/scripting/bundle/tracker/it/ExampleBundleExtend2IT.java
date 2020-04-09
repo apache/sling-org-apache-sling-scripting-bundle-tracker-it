@@ -93,6 +93,18 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
                 , w.size());
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
+
+        Elements localTemplate = document.select("div.template.two");
+        assertEquals("two", localTemplate.html());
+
+        Elements inheritedTemplate = document.select("div.inherited > div.precompiled1Template > p");
+        assertEquals("Hello, John Doe!", inheritedTemplate.html());
+
+        Elements absoluteTemplate1 = document.select("div.absolute-path-1 > div.precompiled1Template > p");
+        assertEquals("Hello, John Doe!", absoluteTemplate1.html());
+
+        Elements absoluteTemplate2 = document.select("div.absolute-path-2 > div.exampledBundleAppsHello > p");
+        assertEquals("Hello, Jack Schitt!", absoluteTemplate2.html());
     }
 
     @Test
