@@ -1,5 +1,8 @@
 {
     "jenkins": {
-        "mavenGoal": "verify"
+        "mavenGoal": "verify",
+        "archivePatterns": [
+            "**/target/rat.txt"
+        ]
     }
 }
