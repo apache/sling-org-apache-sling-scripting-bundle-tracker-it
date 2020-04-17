@@ -65,7 +65,6 @@
                         <Sling-Initial-Content>
                             SLING-INF/content;overwrite:=true;path:=/content/bundled-scripts/examplebundle-precompiled-jsp
                         </Sling-Initial-Content>
-                        <Sling-ResourceType-Precompiled>true</Sling-ResourceType-Precompiled>
                     </instructions>
                 </configuration>
             </plugin>

@@ -41,13 +41,16 @@ public class ExampleBundleExtend2TeleportedIT extends AbstractTeleportedTestBase
             assertNotNull(main);
             assertEquals("org.apache.sling.scripting.examplebundle.extend1.hello/1.0.0", main.getResourceSuperType());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(3, children.size());
+            assertEquals(6, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
                     "h.html",
                     "h.html.servlet",
-                    "html.servlet"
+                    "html.servlet",
+                    "name-provider.js",
+                    "name-provider.js.servlet",
+                    "name-provider.html.servlet"
             );
             assertEquals(expectedChildren, children.keySet());
 

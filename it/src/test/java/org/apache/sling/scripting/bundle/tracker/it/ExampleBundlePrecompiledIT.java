@@ -88,6 +88,9 @@ public class ExampleBundlePrecompiledIT extends AbstractEndpointTestBase {
         assertEquals("Resource based servlet resolution failed.", 1, w.size());
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
+
+        Elements jsUse = document.select("div.js-use");
+        assertEquals("Expected a js-use script to have rendered content", "Hello, John Doe!", jsUse.html());
     }
 
     @Test

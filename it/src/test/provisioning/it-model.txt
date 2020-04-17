@@ -28,6 +28,7 @@
   org.apache.sling/org.apache.sling.scripting.sightly.runtime
   org.apache.sling/org.apache.sling.scripting.sightly.compiler
   org.apache.sling/org.apache.sling.scripting.sightly.compiler.java
+  org.apache.sling/org.apache.sling.scripting.sightly.js.provider
   org.apache.sling/org.apache.sling.commons.compiler
   org.apache.sling/org.apache.sling.scripting.bundle.tracker
   org.apache.sling/org.apache.sling.scripting.examplebundle

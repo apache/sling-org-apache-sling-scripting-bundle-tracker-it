@@ -49,6 +49,9 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
                 , w.size());
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
+
+        Elements jsUse = document.select("div.js-use");
+        assertEquals("Expected a js-use script to have rendered content", "Hello, Jack Black!", jsUse.html());
     }
 
     @Test
@@ -71,6 +74,9 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
                 , w.size());
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
+
+        Elements jsUse = document.select("div.js-use");
+        assertEquals("Expected a js-use script to have rendered content", "Hello, Jack Black!", jsUse.html());
     }
 
     @Test
@@ -105,6 +111,9 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
 
         Elements absoluteTemplate2 = document.select("div.absolute-path-2 > div.exampledBundleAppsHello > p");
         assertEquals("Hello, Jack Schitt!", absoluteTemplate2.html());
+
+        Elements jsUse = document.select("div.js-use");
+        assertEquals("Expected a js-use script to have rendered content", "Hello, Jack Black!", jsUse.html());
     }
 
     @Test
@@ -127,6 +136,9 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
                 , w.size());
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
+
+        Elements jsUse = document.select("div.js-use");
+        assertEquals("Expected a js-use script to have rendered content", "Hello, Jack Black!", jsUse.html());
     }
 
     @Test

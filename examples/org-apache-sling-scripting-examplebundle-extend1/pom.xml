@@ -45,9 +45,6 @@
                         <goals>
                             <goal>metadata</goal>
                         </goals>
-                        <configuration>
-                            <sourceDirectory>src/main/resources/javax.script</sourceDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

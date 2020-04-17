@@ -46,7 +46,9 @@
                             <goal>metadata</goal>
                         </goals>
                         <configuration>
-                            <sourceDirectory>src/main/resources/javax.script</sourceDirectory>
+                            <scriptEngineMappings>
+                                <js>rhino</js>
+                            </scriptEngineMappings>
                         </configuration>
                     </execution>
                 </executions>
