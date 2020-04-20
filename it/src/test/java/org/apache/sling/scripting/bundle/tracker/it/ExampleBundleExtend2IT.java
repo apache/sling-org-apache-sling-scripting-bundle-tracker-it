@@ -114,6 +114,9 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
 
         Elements jsUse = document.select("div.js-use");
         assertEquals("Expected a js-use script to have rendered content", "Hello, Jack Black!", jsUse.html());
+
+        Elements jsUseRepo = document.select("div.js-use-resource-type-repository");
+        assertEquals("Expected a js-use script to have rendered content", "use-script-repo.js says hello", jsUseRepo.html());
     }
 
     @Test

@@ -67,7 +67,8 @@
                             ${org.apache.sling.scriptingbundle.maven.plugin.Require-Capability}
                         </Require-Capability>
                         <Sling-Initial-Content>
-                            SLING-INF/content;overwrite:=true;path:=/content/bundled-scripts/examplebundle-extend2
+                            SLING-INF/content;overwrite:=true;path:=/content/bundled-scripts/examplebundle-extend2,
+                            SLING-INF/apps/org.apache.sling.scripting.examplebundle.extend2.two/1.0.0;overwrite:=true;path:=/apps/org.apache.sling.scripting.examplebundle.extend2.two/1.0.0
                         </Sling-Initial-Content>
                     </instructions>
                 </configuration>
