@@ -26,3 +26,21 @@
         <type>String</type>
     </property>
 </node>
+<node>
+<name>base</name>
+<primaryNodeType>nt:unstructured</primaryNodeType>
+<property>
+    <name>sling:resourceType</name>
+    <value>org.apache.sling.scripting.examplebundle.precompiled.jsp.base</value>
+    <type>String</type>
+</property>
+</node>
+<node>
+<name>extends</name>
+<primaryNodeType>nt:unstructured</primaryNodeType>
+<property>
+    <name>sling:resourceType</name>
+    <value>org.apache.sling.scripting.examplebundle.precompiled.jsp.extends</value>
+    <type>String</type>
+</property>
+</node>

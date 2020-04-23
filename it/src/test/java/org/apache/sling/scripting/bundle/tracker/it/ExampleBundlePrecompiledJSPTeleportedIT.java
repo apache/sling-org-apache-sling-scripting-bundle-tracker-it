@@ -64,4 +64,58 @@ public class ExampleBundlePrecompiledJSPTeleportedIT extends AbstractTeleportedT
             }
         }
     }
+
+    @Test
+    public void testBase() throws LoginException {
+        final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.jsp.base";
+        ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
+        try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
+            Resource main = resolver.getResource("/apps/" + expectedRT);
+            assertNotNull(main);
+            assertTrue(main.getValueMap().isEmpty());
+            Map<String, Resource> children = collectResourceChildren(main);
+            assertEquals(6, children.size());
+
+            Set<String> expectedChildren = getChildrenForServletResource(
+                    "/apps/" + expectedRT,
+                    "html.jsp",
+                    "html.jsp.servlet",
+                    "html.servlet",
+                    "selector.jsp",
+                    "selector.html.servlet",
+                    "selector.jsp.servlet"
+            );
+            assertEquals(expectedChildren, children.keySet());
+
+            for (Resource child : children.values()) {
+                assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",
+                        child.getResourceSuperType());
+            }
+        }
+    }
+
+    @Test
+    public void testExtends() throws LoginException {
+        final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.jsp.extends";
+        ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
+        try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
+            Resource main = resolver.getResource("/apps/" + expectedRT);
+            assertNotNull(main);
+            assertTrue(main.getValueMap().isEmpty());
+            Map<String, Resource> children = collectResourceChildren(main);
+            assertEquals(4, children.size());
+
+            Set<String> expectedChildren = getChildrenForServletResource(
+                    "/apps/" + expectedRT,
+                    "html.servlet",
+                    "selector.jsp",
+                    "selector.html.servlet",
+                    "selector.jsp.servlet"
+            );
+            assertEquals(expectedChildren, children.keySet());
+
+            assertEquals("org.apache.sling.scripting.examplebundle.precompiled.jsp.base", children.get("/apps/" + expectedRT + "/html" +
+                    ".servlet").getResourceSuperType());
+        }
+    }
 }

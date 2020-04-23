@@ -49,4 +49,34 @@ public class ExampleBundlePrecompiledJSPIT extends AbstractEndpointTestBase {
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
     }
 
+    @Test
+    public void testBase() throws Exception {
+        final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.jsp.base";
+        Document document = getDocument(ROOT + "/base.html");
+        Elements h2 = document.select("h2");
+        assertEquals(expectedRT, h2.html());
+        final String expectedScriptDriver =
+                "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__jsp__002e__base.html__002e__jsp";
+        assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
+        Elements selector = document.select("#base-selector");
+        assertEquals("Resource based servlet resolution failed.", 1, selector.size());
+        assertEquals("selector.jsp", selector.html());
+        assertEquals(expectedRT, selector.attr(DATA_RT_ATTRIBUTE));
+    }
+
+    @Test
+    public void testExtends() throws Exception {
+        final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.jsp.extends";
+        Document document = getDocument(ROOT + "/extends.html");
+        Elements h2 = document.select("h2");
+        assertEquals(expectedRT, h2.html());
+        final String expectedScriptDriver =
+                "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__jsp__002e__base.html__002e__jsp";
+        assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
+        Elements selector = document.select("#extends-selector");
+        assertEquals("Resource based servlet resolution failed.", 1, selector.size());
+        assertEquals("selector.jsp", selector.html());
+        assertEquals(expectedRT, selector.attr(DATA_RT_ATTRIBUTE));
+    }
+
 }
