@@ -45,11 +45,6 @@
                         <goals>
                             <goal>metadata</goal>
                         </goals>
-                        <configuration>
-                            <scriptEngineMappings>
-                                <js>rhino</js>
-                            </scriptEngineMappings>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -70,6 +65,9 @@
                             SLING-INF/content;overwrite:=true;path:=/content/bundled-scripts/examplebundle-extend2,
                             SLING-INF/apps/org.apache.sling.scripting.examplebundle.extend2.two/1.0.0;overwrite:=true;path:=/apps/org.apache.sling.scripting.examplebundle.extend2.two/1.0.0
                         </Sling-Initial-Content>
+                        <Sling-Bundle-Resources>
+                            /apps/org.apache.sling.scripting.examplebundle.extend2.one/1.0.0/name-provider.js;path:=/javax.script/org.apache.sling.scripting.examplebundle.extend2.one/1.0.0/name-provider.js
+                        </Sling-Bundle-Resources>
                     </instructions>
                 </configuration>
             </plugin>

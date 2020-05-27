@@ -39,11 +39,6 @@
                 <groupId>org.apache.sling</groupId>
                 <artifactId>scriptingbundle-maven-plugin</artifactId>
                 <version>0.1.1-SNAPSHOT</version>
-                <configuration>
-                    <scriptEngineMappings>
-                        <js>rhino</js>
-                    </scriptEngineMappings>
-                </configuration>
                 <executions>
                     <execution>
                         <phase>prepare-package</phase>
@@ -70,6 +65,10 @@
                         <Sling-Initial-Content>
                             SLING-INF/content;overwrite:=true;path:=/content/bundled-scripts/examplebundle-precompiled
                         </Sling-Initial-Content>
+                        <Sling-Bundle-Resources>
+                            /apps/org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/name-provider.js;path:=/javax.script/org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/name-provider.js,
+                            /apps/org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/use-script.js;path:=/javax.script/org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/use-script.js
+                        </Sling-Bundle-Resources>
                     </instructions>
                 </configuration>
             </plugin>
