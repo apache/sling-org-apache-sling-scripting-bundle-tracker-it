@@ -35,7 +35,7 @@ public class ExampleBundlePrecompiledJSPIT extends AbstractEndpointTestBase {
         Document document = getDocument(ROOT + "/hello.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__jsp__002e__hello.hello__002e__jsp";
+        final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.precompiled.jsp.hello/hello.jsp";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-precompiled-jsp");
@@ -56,7 +56,7 @@ public class ExampleBundlePrecompiledJSPIT extends AbstractEndpointTestBase {
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
         final String expectedScriptDriver =
-                "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__jsp__002e__base.html__002e__jsp";
+                "org.apache.sling.scripting.examplebundle.precompiled.jsp.base/html.jsp";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
         Elements selector = document.select("#base-selector");
         assertEquals("Resource based servlet resolution failed.", 1, selector.size());
@@ -71,7 +71,7 @@ public class ExampleBundlePrecompiledJSPIT extends AbstractEndpointTestBase {
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
         final String expectedScriptDriver =
-                "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__jsp__002e__base.html__002e__jsp";
+                "org.apache.sling.scripting.examplebundle.precompiled.jsp.base/html.jsp";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
         Elements selector = document.select("#extends-selector");
         assertEquals("Resource based servlet resolution failed.", 1, selector.size());

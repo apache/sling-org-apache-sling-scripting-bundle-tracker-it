@@ -54,7 +54,7 @@ public class ScriptMatchIT extends AbstractEndpointTestBase {
         HttpResponse response = getResponse(HttpHead.METHOD_NAME, SCRIPT_MATCHING_BASE + ".html");
         Header[] header = response.getHeaders("X-Script-Name");
         assertEquals("Expected to find one X-Script-Name header.", 1, header.length);
-        assertEquals("/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/HEAD.html", header[0].getValue());
+        assertEquals("org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/HEAD.html", header[0].getValue());
     }
 
     @Test
@@ -62,7 +62,7 @@ public class ScriptMatchIT extends AbstractEndpointTestBase {
         HttpResponse response = getResponse(HttpHead.METHOD_NAME, SCRIPT_MATCHING_BASE + ".selector-1.html");
         Header[] header = response.getHeaders("X-Script-Name");
         assertEquals("Expected to find one X-Script-Name header.", 1, header.length);
-        assertEquals("/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/selector-1.HEAD.html",
+        assertEquals("org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/selector-1.HEAD.html",
                 header[0].getValue());
     }
 
@@ -129,7 +129,7 @@ public class ScriptMatchIT extends AbstractEndpointTestBase {
     @Test
     public void testSelectorMatching() throws Exception {
         Document document = getDocument(SCRIPT_MATCHING_BASE + ".selector-2.html");
-        assertTrue(document.select("div").html().contains("/javax.script/org.apache.sling.scripting.examplebundle" +
+        assertTrue(document.select("div").html().contains("org.apache.sling.scripting.examplebundle" +
                 ".scriptmatching/1.0.0/selector-2.html"));
     }
 
@@ -147,7 +147,7 @@ public class ScriptMatchIT extends AbstractEndpointTestBase {
         } else {
             throw new IllegalArgumentException("The following URL doesn't seem to be correctly handled: " + url);
         }
-        String expectedScriptName = "/javax.script/org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/" +
+        String expectedScriptName = "org.apache.sling.scripting.examplebundle.scriptmatching/1.0.0/" +
                 (StringUtils.isNotEmpty(selectorString) ? selectorString + "." : "") + httpMethod + "." + extension;
         assertTrue(document.select("div").html().contains(expectedScriptName));
     }

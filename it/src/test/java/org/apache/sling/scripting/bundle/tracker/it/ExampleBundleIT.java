@@ -35,7 +35,7 @@ public class ExampleBundleIT extends AbstractEndpointTestBase {
         Document document = getDocument(ROOT + "/hello.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "/javax.script/org.apache.sling.scripting.examplebundle.hello/2.0.0/hello.html";
+        final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.hello/2.0.0/hello.html";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-2");
@@ -55,7 +55,7 @@ public class ExampleBundleIT extends AbstractEndpointTestBase {
         Document document = getDocument(ROOT + "/hello-v2.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "/javax.script/org.apache.sling.scripting.examplebundle.hello/2.0.0/hello.html";
+        final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.hello/2.0.0/hello.html";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-2");
@@ -75,7 +75,7 @@ public class ExampleBundleIT extends AbstractEndpointTestBase {
         Document document = getDocument(ROOT + "/hello-v1.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "/javax.script/org.apache.sling.scripting.examplebundle.hello/1.0.0/hello.html";
+        final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.hello/1.0.0/hello.html";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-1");
@@ -95,7 +95,7 @@ public class ExampleBundleIT extends AbstractEndpointTestBase {
         Document document = getDocument(ROOT + "/apps-hello.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "/javax.script/apps/sling/scripting/examplebundle/hello/hello.html";
+        final String expectedScriptDriver = "/apps/sling/scripting/examplebundle/hello/hello.html";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-examplebundle-hello");

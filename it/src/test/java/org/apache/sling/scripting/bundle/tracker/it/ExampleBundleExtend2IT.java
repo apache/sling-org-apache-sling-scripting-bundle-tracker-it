@@ -36,7 +36,7 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
         Document document = getDocument(ROOT + "/one.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__hello.__0031____002e__0__002e__0.hello__002e__html";
+        final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/hello.html";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-extend2-one");
@@ -61,7 +61,7 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
         Document document = getDocument(ROOT + "/one-v1.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "org__002e__apache__002e__sling__002e__scripting__002e__examplebundle__002e__precompiled__002e__hello.__0031____002e__0__002e__0.hello__002e__html";
+        final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/hello.html";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-extend2-one");
@@ -86,7 +86,7 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
         Document document = getDocument(ROOT + "/two.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "/javax.script/org.apache.sling.scripting.examplebundle.extend2.two/1.0.0/two.html";
+        final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.extend2.two/1.0.0/two.html";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-extend2-one");
@@ -126,7 +126,7 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
         Document document = getDocument(ROOT + "/two-v1.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "/javax.script/org.apache.sling.scripting.examplebundle.extend2.two/1.0.0/two.html";
+        final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.extend2.two/1.0.0/two.html";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-extend2-one");
@@ -151,7 +151,7 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
         Document document = getDocument(ROOT + "/three.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "/javax.script/apps/sling/scripting/examplebundle/hello/hello.html";
+        final String expectedScriptDriver = "apps/sling/scripting/examplebundle/hello/hello.html";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
         Elements h = document.select("#h-extend2-three");
