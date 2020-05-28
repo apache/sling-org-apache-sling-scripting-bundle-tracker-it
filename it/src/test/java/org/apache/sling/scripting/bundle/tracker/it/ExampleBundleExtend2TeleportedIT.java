@@ -20,6 +20,7 @@ package org.apache.sling.scripting.bundle.tracker.it;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.Resource;
@@ -41,21 +42,16 @@ public class ExampleBundleExtend2TeleportedIT extends AbstractTeleportedTestBase
             assertNotNull(main);
             assertEquals("org.apache.sling.scripting.examplebundle.extend1.hello/1.0.0", main.getResourceSuperType());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(6, children.size());
+            assertEquals(2, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
                     "h.html",
-                    "h.html.servlet",
-                    "html.servlet",
-                    "name-provider.js",
-                    "name-provider.js.servlet",
-                    "name-provider.html.servlet"
+                    "name-provider.js"
             );
-            assertEquals(expectedChildren, children.keySet());
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
 
-            assertEquals("org.apache.sling.scripting.examplebundle.extend1.hello/1.0.0", children.get("/apps/" + expectedRT + "/html" +
-                    ".servlet").getResourceSuperType());
+            assertEquals("org.apache.sling.scripting.examplebundle.extend1.hello/1.0.0", main.getResourceSuperType());
         }
     }
 
@@ -68,21 +64,17 @@ public class ExampleBundleExtend2TeleportedIT extends AbstractTeleportedTestBase
             assertNotNull(main);
             assertEquals("org.apache.sling.scripting.examplebundle.extend2.one/1.0.0", main.getResourceSuperType());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(6, children.size());
+            assertEquals(4, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
-                    "html.servlet",
+                    "1.0.0.servlet",
                     "two.html",
-                    "two.html.servlet",
                     "two-templates.html",
-                    "two-templates.html.servlet",
                     "use-script-repo.js"
             );
-            assertEquals(expectedChildren, children.keySet());
-
-            assertEquals("org.apache.sling.scripting.examplebundle.extend2.one/1.0.0", children.get("/apps/" + expectedRT + "/html" +
-                    ".servlet").getResourceSuperType());
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
+            assertEquals("org.apache.sling.scripting.examplebundle.extend2.one/1.0.0", main.getResourceSuperType());
         }
     }
 
@@ -95,18 +87,15 @@ public class ExampleBundleExtend2TeleportedIT extends AbstractTeleportedTestBase
             assertNotNull(main);
             assertEquals("sling/scripting/examplebundle/hello", main.getResourceSuperType());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(3, children.size());
+            assertEquals(1, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
-                    "h.html",
-                    "h.html.servlet",
-                    "html.servlet"
+                    "h.html"
             );
-            assertEquals(expectedChildren, children.keySet());
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
 
-            assertEquals("sling/scripting/examplebundle/hello", children.get("/apps/" + expectedRT + "/html" +
-                    ".servlet").getResourceSuperType());
+            assertEquals("sling/scripting/examplebundle/hello", main.getResourceSuperType());
         }
     }
 }

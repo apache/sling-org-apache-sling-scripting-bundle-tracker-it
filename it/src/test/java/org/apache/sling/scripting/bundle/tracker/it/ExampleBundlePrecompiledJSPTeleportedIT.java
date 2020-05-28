@@ -20,6 +20,7 @@ package org.apache.sling.scripting.bundle.tracker.it;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.Resource;
@@ -42,21 +43,16 @@ public class ExampleBundlePrecompiledJSPTeleportedIT extends AbstractTeleportedT
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(9, children.size());
+            assertEquals(4, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
-                    "h.jsp",
-                    "h.jsp.servlet",
-                    "h.html.servlet",
-                    "w.jsp",
-                    "w.jsp.servlet",
-                    "w.html.servlet",
                     "hello.jsp",
-                    "hello.jsp.servlet",
-                    "html.servlet"
+                    "h.jsp",
+                    "w.jsp",
+                    "org.apache.sling.scripting.examplebundle.precompiled.jsp.hello.servlet"
             );
-            assertEquals(expectedChildren, children.keySet());
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
 
             for (Resource child : children.values()) {
                 assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",
@@ -74,19 +70,16 @@ public class ExampleBundlePrecompiledJSPTeleportedIT extends AbstractTeleportedT
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(6, children.size());
+            assertEquals(3, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
                     "html.jsp",
-                    "html.jsp.servlet",
                     "html.servlet",
-                    "selector.jsp",
-                    "selector.html.servlet",
-                    "selector.jsp.servlet"
+                    "selector.jsp"
             );
-            assertEquals(expectedChildren, children.keySet());
-
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
+            assertTrue(String.format("Did not expect any properties on the %s resource.", main.getPath()), main.getValueMap().isEmpty());
             for (Resource child : children.values()) {
                 assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",
                         child.getResourceSuperType());
@@ -101,21 +94,16 @@ public class ExampleBundlePrecompiledJSPTeleportedIT extends AbstractTeleportedT
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
             Resource main = resolver.getResource("/apps/" + expectedRT);
             assertNotNull(main);
-            assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(4, children.size());
+            assertEquals(1, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
-                    "html.servlet",
-                    "selector.jsp",
-                    "selector.html.servlet",
-                    "selector.jsp.servlet"
+                    "selector.jsp"
             );
-            assertEquals(expectedChildren, children.keySet());
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
 
-            assertEquals("org.apache.sling.scripting.examplebundle.precompiled.jsp.base", children.get("/apps/" + expectedRT + "/html" +
-                    ".servlet").getResourceSuperType());
+            assertEquals("org.apache.sling.scripting.examplebundle.precompiled.jsp.base", main.getResourceSuperType());
         }
     }
 }

@@ -35,5 +35,6 @@ public class ITCustomizer implements TeleporterRule.Customizer {
         cst.includeDependencyPrefix("org.apache.sling.scripting.bundle.tracker.it");
         cst.setTestReadyTimeoutSeconds(20);
         cst.setWaitForServiceTimoutSeconds(20);
+        cst.setEnableLogging(true);
     }
 }

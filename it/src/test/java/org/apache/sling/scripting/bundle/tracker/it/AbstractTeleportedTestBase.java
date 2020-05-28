@@ -51,7 +51,7 @@ public class AbstractTeleportedTestBase {
 
     protected Map<String, Resource> collectResourceChildren(Resource resource) {
         Map<String, Resource> children = new HashMap<>();
-        resource.getChildren().forEach(child -> children.put(child.getPath(), child));
+        resource.getChildren().forEach(child -> children.put(child.getName(), child));
         return children;
     }
 }

@@ -20,6 +20,7 @@ package org.apache.sling.scripting.bundle.tracker.it;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.Resource;
@@ -42,32 +43,19 @@ public class ExampleBundlePrecompiledTeleportedIT extends AbstractTeleportedTest
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(15, children.size());
+            assertEquals(7, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
                     "h.html",
-                    "h.html.servlet",
                     "w.html",
-                    "w.html.servlet",
                     "hello.html",
-                    "hello.html.servlet",
-                    "html.servlet",
+                    "1.0.0.servlet",
                     "templates.html",
-                    "templates.html.servlet",
                     "name-provider.js",
-                    "name-provider.js.servlet",
-                    "name-provider.html.servlet",
-                    "use-script.js",
-                    "use-script.js.servlet",
-                    "use-script.html.servlet"
+                    "use-script.js"
             );
-            assertEquals(expectedChildren, children.keySet());
-
-            for (Resource child : children.values()) {
-                assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",
-                        child.getResourceSuperType());
-            }
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
         }
     }
 
@@ -80,19 +68,16 @@ public class ExampleBundlePrecompiledTeleportedIT extends AbstractTeleportedTest
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(7, children.size());
+            assertEquals(4, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
                     "h.html",
-                    "h.html.servlet",
                     "w.html",
-                    "w.html.servlet",
                     "hello.html",
-                    "hello.html.servlet",
-                    "html.servlet"
+                    "2.0.0.servlet"
             );
-            assertEquals(expectedChildren, children.keySet());
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
 
             for (Resource child : children.values()) {
                 assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",

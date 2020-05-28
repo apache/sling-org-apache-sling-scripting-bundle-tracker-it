@@ -20,6 +20,7 @@ package org.apache.sling.scripting.bundle.tracker.it;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.Resource;
@@ -42,19 +43,16 @@ public class ExampleBundleTeleportedIT extends AbstractTeleportedTestBase {
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(7, children.size());
+            assertEquals(4, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
                     "h.html",
-                    "h.html.servlet",
                     "w.html",
-                    "w.html.servlet",
                     "hello.html",
-                    "hello.html.servlet",
-                    "html.servlet"
+                    "1.0.0.servlet"
             );
-            assertEquals(expectedChildren, children.keySet());
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
 
             for (Resource child : children.values()) {
                 assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",
@@ -72,19 +70,16 @@ public class ExampleBundleTeleportedIT extends AbstractTeleportedTestBase {
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(7, children.size());
+            assertEquals(4, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
                     "h.html",
-                    "h.html.servlet",
                     "w.html",
-                    "w.html.servlet",
                     "hello.html",
-                    "hello.html.servlet",
-                    "html.servlet"
+                    "2.0.0.servlet"
             );
-            assertEquals(expectedChildren, children.keySet());
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
 
             for (Resource child : children.values()) {
                 assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",
@@ -102,21 +97,16 @@ public class ExampleBundleTeleportedIT extends AbstractTeleportedTestBase {
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(9, children.size());
+            assertEquals(4, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
                     "h.html",
-                    "h.html.servlet",
                     "w.html",
-                    "w.html.servlet",
                     "hello.html",
-                    "hello.html.servlet",
-                    "html.servlet",
-                    "templates.html",
-                    "templates.html.servlet"
+                    "templates.html"
             );
-            assertEquals(expectedChildren, children.keySet());
+            assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
 
             for (Resource child : children.values()) {
                 assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",
