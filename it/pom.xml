@@ -30,7 +30,6 @@
 
     <artifactId>org.apache.sling.scripting.bundle.tracker.it</artifactId>
     <version>0.1.1-SNAPSHOT</version>
-    <packaging>slingstart</packaging>
 
     <properties>
         <jacoco.maven.plugin.version>0.8.2</jacoco.maven.plugin.version>
