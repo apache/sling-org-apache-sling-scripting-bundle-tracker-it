@@ -16,9 +16,4 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
-<h2 data-script="${javax_script_filename}">${resource.resourceType}</h2>
-<sly data-sly-include="h.html"/> <sly data-sly-include="w.html"/>
-<div data-sly-use.slingSettings="org.apache.sling.settings.SlingSettingsService"
-     data-sly-test.slingId="${slingSettings.slingId}"
-     id="sling-id">${slingId}</div>
-<sly data-sly-include="nested/selector.html"/>
+<span id="nested-selector-2" data-rt="${resource.resourceType}">Nested Selector</span>

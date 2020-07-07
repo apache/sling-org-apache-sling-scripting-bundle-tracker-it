@@ -68,20 +68,24 @@ public class ExampleBundlePrecompiledTeleportedIT extends AbstractTeleportedTest
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
-            assertEquals(4, children.size());
+            assertEquals(5, children.size());
 
             Set<String> expectedChildren = getChildrenForServletResource(
                     "/apps/" + expectedRT,
                     "h.html",
                     "w.html",
                     "hello.html",
-                    "2.0.0.servlet"
+                    "2.0.0.servlet",
+                    "nested"
             );
+            assertNotNull(resolver.getResource("/apps/" + expectedRT + "/nested/selector.html"));
             assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
 
             for (Resource child : children.values()) {
-                assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",
-                        child.getResourceSuperType());
+                if (!"nested".equals(child.getName())) {
+                    assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",
+                            child.getResourceSuperType());
+                }
             }
         }
     }

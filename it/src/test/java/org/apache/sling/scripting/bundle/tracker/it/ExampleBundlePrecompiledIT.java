@@ -67,6 +67,11 @@ public class ExampleBundlePrecompiledIT extends AbstractEndpointTestBase {
         assertEquals("Resource based servlet resolution failed.", 1, w.size());
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
+
+        Elements ns = document.select("#nested-selector-2");
+        assertEquals("Resource based servlet resolution failed.", 1, ns.size());
+        assertEquals("Nested Selector", ns.html());
+        assertEquals(expectedRT, ns.attr(DATA_RT_ATTRIBUTE));
     }
 
     @Test
