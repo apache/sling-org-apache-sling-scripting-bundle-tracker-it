@@ -39,7 +39,7 @@ public class ExampleBundleTeleportedIT extends AbstractTeleportedTestBase {
         final String expectedRT = "org.apache.sling.scripting.examplebundle.hello/1.0.0";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
@@ -66,7 +66,7 @@ public class ExampleBundleTeleportedIT extends AbstractTeleportedTestBase {
         final String expectedRT = "org.apache.sling.scripting.examplebundle.hello/2.0.0";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
@@ -93,7 +93,7 @@ public class ExampleBundleTeleportedIT extends AbstractTeleportedTestBase {
         final String expectedRT = "sling/scripting/examplebundle/hello";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);

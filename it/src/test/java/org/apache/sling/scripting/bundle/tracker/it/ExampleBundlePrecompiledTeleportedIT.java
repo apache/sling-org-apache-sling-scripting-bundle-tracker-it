@@ -39,7 +39,7 @@ public class ExampleBundlePrecompiledTeleportedIT extends AbstractTeleportedTest
         final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
@@ -64,7 +64,7 @@ public class ExampleBundlePrecompiledTeleportedIT extends AbstractTeleportedTest
         final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.hello/2.0.0";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
@@ -78,7 +78,7 @@ public class ExampleBundlePrecompiledTeleportedIT extends AbstractTeleportedTest
                     "2.0.0.servlet",
                     "nested"
             );
-            assertNotNull(resolver.getResource("/apps/" + expectedRT + "/nested/selector.html"));
+            assertNotNull(resolver.resolve("/apps/" + expectedRT + "/nested/selector.html"));
             assertEquals(expectedChildren, children.values().stream().map(Resource::getPath).collect(Collectors.toSet()));
 
             for (Resource child : children.values()) {

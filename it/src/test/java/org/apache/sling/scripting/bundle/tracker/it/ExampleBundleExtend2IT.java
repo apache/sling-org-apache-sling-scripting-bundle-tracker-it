@@ -20,7 +20,6 @@ package org.apache.sling.scripting.bundle.tracker.it;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -31,7 +30,6 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
     private static final String ROOT = BASE + "/examplebundle-extend2";
 
     @Test
-    @Ignore
     public void testOne() throws Exception {
         final String expectedRT = "org.apache.sling.scripting.examplebundle.extend2.one/1.0.0";
 
@@ -57,7 +55,6 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
     }
 
     @Test
-    @Ignore
     public void testOneV1() throws Exception {
         final String expectedRT = "org.apache.sling.scripting.examplebundle.extend2.one/1.0.0";
 

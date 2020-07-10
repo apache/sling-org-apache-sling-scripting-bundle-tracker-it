@@ -38,7 +38,7 @@ public class ExampleBundleExtend2TeleportedIT extends AbstractTeleportedTestBase
         final String expectedRT = "org.apache.sling.scripting.examplebundle.extend2.one/1.0.0";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertEquals("org.apache.sling.scripting.examplebundle.extend1.hello/1.0.0", main.getResourceSuperType());
             Map<String, Resource> children = collectResourceChildren(main);
@@ -60,7 +60,7 @@ public class ExampleBundleExtend2TeleportedIT extends AbstractTeleportedTestBase
         final String expectedRT = "org.apache.sling.scripting.examplebundle.extend2.two/1.0.0";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertEquals("org.apache.sling.scripting.examplebundle.extend2.one/1.0.0", main.getResourceSuperType());
             Map<String, Resource> children = collectResourceChildren(main);
@@ -83,7 +83,7 @@ public class ExampleBundleExtend2TeleportedIT extends AbstractTeleportedTestBase
         final String expectedRT = "org.apache.sling.scripting.examplebundle.extend2.three";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertEquals("sling/scripting/examplebundle/hello", main.getResourceSuperType());
             Map<String, Resource> children = collectResourceChildren(main);

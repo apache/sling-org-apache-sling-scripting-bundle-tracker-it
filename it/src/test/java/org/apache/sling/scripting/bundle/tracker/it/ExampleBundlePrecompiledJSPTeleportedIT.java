@@ -39,7 +39,7 @@ public class ExampleBundlePrecompiledJSPTeleportedIT extends AbstractTeleportedT
         final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.jsp.hello";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
@@ -66,7 +66,7 @@ public class ExampleBundlePrecompiledJSPTeleportedIT extends AbstractTeleportedT
         final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.jsp.base";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertTrue(main.getValueMap().isEmpty());
             Map<String, Resource> children = collectResourceChildren(main);
@@ -92,7 +92,7 @@ public class ExampleBundlePrecompiledJSPTeleportedIT extends AbstractTeleportedT
         final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.jsp.extends";
         ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
         try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource main = resolver.getResource("/apps/" + expectedRT);
+            Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             Map<String, Resource> children = collectResourceChildren(main);
             assertEquals(1, children.size());
