@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~ Licensed to the Apache Software Foundation (ASF) under one
   ~ or more contributor license agreements.  See the NOTICE file
   ~ distributed with this work for additional information
@@ -16,22 +15,5 @@
   ~ KIND, either express or implied.  See the License for the
   ~ specific language governing permissions and limitations
   ~ under the License.
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<node>
-    <name>hello</name>
-    <primaryNodeType>nt:unstructured</primaryNodeType>
-    <property>
-        <name>sling:resourceType</name>
-        <value>sling/scripting/examplebundle-classic/hello</value>
-        <type>String</type>
-    </property>
-</node>
-<node>
-    <name>hello2</name>
-    <primaryNodeType>nt:unstructured</primaryNodeType>
-    <property>
-        <name>sling:resourceType</name>
-        <value>sling/scripting/examplebundle-classic/hello2</value>
-        <type>String</type>
-    </property>
-</node>
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+<sly data-sly-use.template="template.html" data-sly-call="${template.one @ name = 'John Doe'}"></sly>

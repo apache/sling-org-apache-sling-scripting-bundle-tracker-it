@@ -1,0 +1,3 @@
+{
+    "sling:resourceSuperType": "sling/scripting/examplebundle/precompiled/ttest"
+}

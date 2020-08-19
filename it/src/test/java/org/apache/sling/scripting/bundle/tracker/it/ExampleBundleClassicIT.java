@@ -19,10 +19,12 @@
 package org.apache.sling.scripting.bundle.tracker.it;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ExampleBundleClassicIT extends AbstractEndpointTestBase {
 
@@ -43,5 +45,16 @@ public class ExampleBundleClassicIT extends AbstractEndpointTestBase {
         assertEquals("Resource based servlet resolution failed.", 1, w.size());
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
+    }
+
+    @Test
+    public void testHello2() throws Exception {
+        Document document = getDocument(ROOT + "/hello2.html");
+
+        Elements divs = document.select("div");
+        assertEquals("Expected to find one div rendered at this endpoint.", 1, divs.size());
+
+        Element div = divs.get(0);
+        assertTrue("Expected to find an overlaid template.", div.hasClass("examplebundle-classic-template"));
     }
 }
