@@ -89,8 +89,6 @@
                 <configuration>
                     <jasperMappedFile>true</jasperMappedFile>
                     <jasperKeepGenerated>true</jasperKeepGenerated>
-                    <compilerSourceVM>1.8</compilerSourceVM>
-                    <compilerTargetVM>1.8</compilerTargetVM>
                 </configuration>
             </plugin>
             <plugin>
