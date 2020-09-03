@@ -21,6 +21,8 @@
 <sly data-sly-use.twoTemplates="two-templates.html" data-sly-call="${twoTemplates.two}"></sly>
 <div class="inherited" data-sly-use.inheritedTemplates="templates.html"
        data-sly-call="${inheritedTemplates.precompiled1Template @ name ='John Doe'}"></div>
+<div class="inherited-relative" data-sly-use.inheritedTemplates="./templates.html"
+     data-sly-call="${inheritedTemplates.precompiled1Template @ name ='John Doe'}"></div>
 <div class="absolute-path-1"
      data-sly-use.absolutePathTemplates1="/org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/templates.html"
      data-sly-call="${absolutePathTemplates1.precompiled1Template @ name ='John Doe'}"></div>

@@ -106,6 +106,9 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
         Elements inheritedTemplate = document.select("div.inherited > div.precompiled1Template > p");
         assertEquals("Hello, John Doe!", inheritedTemplate.html());
 
+        Elements inheritedTemplateViaRelativePath = document.select("div.inherited-relative > div.precompiled1Template > p");
+        assertEquals("Hello, John Doe!", inheritedTemplateViaRelativePath.html());
+
         Elements absoluteTemplate1 = document.select("div.absolute-path-1 > div.precompiled1Template > p");
         assertEquals("Hello, John Doe!", absoluteTemplate1.html());
 
