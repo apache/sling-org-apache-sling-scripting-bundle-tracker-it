@@ -37,6 +37,7 @@
   org.apache.sling/org.apache.sling.scripting.examplebundle.extend1
   org.apache.sling/org.apache.sling.scripting.examplebundle.extend2
   org.apache.sling/org.apache.sling.scripting.examplebundle.precompiled
+  org.apache.sling/org.apache.sling.scripting.examplebundle.precompiled.extend1
   org.apache.sling/org.apache.sling.scripting.examplebundle.precompiled.jsp
   org.apache.sling/org.apache.sling.junit.core
 
