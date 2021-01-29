@@ -21,6 +21,7 @@
 
 # Dependencies
 [artifacts]
+  org.apache.sling/org.apache.sling.servlets.resolver.api
   org.apache.sling/org.apache.sling.servlets.resolver
   org.apache.sling/org.apache.sling.scripting.core
   org.apache.sling/org.apache.sling.commons.compiler
