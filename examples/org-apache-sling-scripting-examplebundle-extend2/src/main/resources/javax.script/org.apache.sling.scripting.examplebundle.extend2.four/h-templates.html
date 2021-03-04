@@ -16,7 +16,6 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
-<span id="h-precompiled-1" data-rt="${resource.resourceType}">Hello</span>
-<div id="h-precompiled-template-wrapper1">
-<sly data-sly-use.templates="templates.html" data-sly-call="${templates.precompiled1Template @ name='World'}"></sly>
-</div>
+<template data-sly-template.simple>
+Hello from overridden template
+</template>

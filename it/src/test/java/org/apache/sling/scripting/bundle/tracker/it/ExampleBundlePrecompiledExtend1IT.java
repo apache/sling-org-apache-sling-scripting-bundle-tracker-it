@@ -25,53 +25,31 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class ExampleBundleExtend1IT extends AbstractEndpointTestBase {
+public class ExampleBundlePrecompiledExtend1IT extends AbstractEndpointTestBase {
 
-    private static final String ROOT = BASE + "/examplebundle-extend1";
+    private static final String ROOT = BASE + "/examplebundle-precompiled-extend1";
 
+    // SLING-10015
     @Test
     public void testHello() throws Exception {
-        final String expectedRT = "org.apache.sling.scripting.examplebundle.extend1.hello/1.0.0";
-
+        final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.extend1.hello/1.0.0";
         Document document = getDocument(ROOT + "/hello.html");
         Elements h2 = document.select("h2");
         assertEquals(expectedRT, h2.html());
         final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/hello.html";
         assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
 
-        Elements h = document.select("#h-extend1");
+        Elements h = document.select("#h-precompiled-1");
         assertEquals("Resource based servlet resolution failed.", 1, h.size());
         assertEquals("Hello", h.html());
         assertEquals(expectedRT, h.attr(DATA_RT_ATTRIBUTE));
-        h = document.select("#h-template-wrapper1");
-        assertEquals("Resource based servlet resolution failed.", 1, h.size());
-        assertEquals("Hello from template", h.html().trim());
+        
+        Elements template = document.select("#h-precompiled-template-wrapper1 > div.precompiled1TemplateExtend1 > p");
+        assertEquals("Resource based servlet resolution failed.", 1, template.size());
+        assertEquals("Hello, extended World!", template.html());
 
         Elements w = document.select("#w-precompiled-1");
-        assertEquals("The w.html script should have been provided by org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0", 1
-                , w.size());
-        assertEquals("World", w.html());
-        assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
-    }
-
-    @Test
-    public void testHelloV1() throws Exception {
-        final String expectedRT = "org.apache.sling.scripting.examplebundle.extend1.hello/1.0.0";
-
-        Document document = getDocument(ROOT + "/hello-v1.html");
-        Elements h2 = document.select("h2");
-        assertEquals(expectedRT, h2.html());
-        final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/hello.html";
-        assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
-
-        Elements h = document.select("#h-extend1");
-        assertEquals("Resource based servlet resolution failed.", 1, h.size());
-        assertEquals("Hello", h.html());
-        assertEquals(expectedRT, h.attr(DATA_RT_ATTRIBUTE));
-
-        Elements w = document.select("#w-precompiled-1");
-        assertEquals("The w.html script should have been provided by org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0", 1
-                , w.size());
+        assertEquals("Resource based servlet resolution failed.", 1, w.size());
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
     }

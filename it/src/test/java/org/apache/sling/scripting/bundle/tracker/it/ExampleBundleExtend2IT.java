@@ -167,4 +167,19 @@ public class ExampleBundleExtend2IT extends AbstractEndpointTestBase {
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
     }
+
+    @Test
+    public void testFour() throws Exception {
+        final String expectedRT = "org.apache.sling.scripting.examplebundle.extend2.four";
+
+        Document document = getDocument(ROOT + "/four.html");
+        System.err.println("four.html content:" + document.toString());
+        Elements h = document.select("#h-extend1");
+        assertEquals("Resource based servlet resolution failed.", 1, h.size());
+        assertEquals("Hello", h.html());
+        assertEquals(expectedRT, h.attr(DATA_RT_ATTRIBUTE));
+        h = document.select("#h-template-wrapper1");
+        assertEquals("Resource based servlet resolution failed.", 1, h.size());
+        assertEquals("Hello from overridden template", h.html().trim());
+    }
 }

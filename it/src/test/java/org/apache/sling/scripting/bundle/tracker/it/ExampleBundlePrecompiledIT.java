@@ -89,6 +89,10 @@ public class ExampleBundlePrecompiledIT extends AbstractEndpointTestBase {
         assertEquals("Hello", h.html());
         assertEquals(expectedRT, h.attr(DATA_RT_ATTRIBUTE));
 
+        Elements template = document.select("#h-precompiled-template-wrapper1 > div.precompiled1Template > p");
+        assertEquals("Resource based servlet resolution failed.", 1, template.size());
+        assertEquals("Hello, World!", template.html());
+        
         Elements w = document.select("#w-precompiled-1");
         assertEquals("Resource based servlet resolution failed.", 1, w.size());
         assertEquals("World", w.html());
