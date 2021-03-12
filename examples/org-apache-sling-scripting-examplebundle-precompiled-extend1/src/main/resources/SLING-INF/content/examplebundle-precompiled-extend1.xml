@@ -26,3 +26,12 @@
         <type>String</type>
     </property>
 </node>
+<node>
+<name>hello-v0_9</name>
+<primaryNodeType>nt:unstructured</primaryNodeType>
+<property>
+    <name>sling:resourceType</name>
+    <value>org.apache.sling.scripting.examplebundle.precompiled.extend1.hello/0.9.0</value>
+    <type>String</type>
+</property>
+</node>

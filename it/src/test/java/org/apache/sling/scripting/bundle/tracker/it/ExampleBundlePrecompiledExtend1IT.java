@@ -53,4 +53,28 @@ public class ExampleBundlePrecompiledExtend1IT extends AbstractEndpointTestBase 
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
     }
+
+    @Test
+    public void testHello_0_9() throws Exception {
+        final String expectedRT = "org.apache.sling.scripting.examplebundle.precompiled.extend1.hello/0.9.0";
+        Document document = getDocument(ROOT + "/hello-v0_9.html");
+        Elements h2 = document.select("h2");
+        assertEquals(expectedRT, h2.html());
+        final String expectedScriptDriver = "org.apache.sling.scripting.examplebundle.precompiled.hello/1.0.0/hello.html";
+        assertTrue(h2.hasAttr(DATA_SCRIPT) && expectedScriptDriver.equals(h2.attr(DATA_SCRIPT)));
+
+        Elements h = document.select("#h-precompiled-1");
+        assertEquals("Resource based servlet resolution failed.", 1, h.size());
+        assertEquals("Hello", h.html());
+        assertEquals(expectedRT, h.attr(DATA_RT_ATTRIBUTE));
+
+        Elements template = document.select("#h-precompiled-template-wrapper1 > div.precompiled1Template > p");
+        assertEquals("Resource based servlet resolution failed.", 1, template.size());
+        assertEquals("Hello, World!", template.html());
+
+        Elements w = document.select("#w-precompiled-1");
+        assertEquals("Resource based servlet resolution failed.", 1, w.size());
+        assertEquals("World", w.html());
+        assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
+    }
 }
