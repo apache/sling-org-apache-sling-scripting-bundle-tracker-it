@@ -1,1 +1,1 @@
-org.apache.sling.scripting.examplebundle.extend1.hello;version=[1.0.0,2.0.0)
+org.apache.sling.scripting.examplebundle.extend1.hello;version="[1.0.0,2.0.0)"
