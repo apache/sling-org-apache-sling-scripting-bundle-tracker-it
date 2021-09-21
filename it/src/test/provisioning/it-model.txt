@@ -39,6 +39,8 @@
   org.apache.sling/org.apache.sling.scripting.examplebundle.precompiled
   org.apache.sling/org.apache.sling.scripting.examplebundle.precompiled.extend1
   org.apache.sling/org.apache.sling.scripting.examplebundle.precompiled.jsp
+  org.apache.sling/org.apache.sling.scripting.content-package-with-bundle-attached/0.1.1-SNAPSHOT/zip
+  org.apache.sling/org.apache.sling.scripting.content-package-with-bundle-attached/0.1.1-SNAPSHOT/jar/precompiled-scripts
   org.apache.sling/org.apache.sling.junit.core
 
 [configurations]
