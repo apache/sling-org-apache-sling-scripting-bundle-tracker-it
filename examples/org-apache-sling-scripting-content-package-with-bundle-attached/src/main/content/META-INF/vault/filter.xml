@@ -18,9 +18,6 @@
   ~ under the License.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <workspaceFilter version="1.0">
-    <!-- 
-        Do not pack the apps folder!
-        <filter root="/apps/sling/scripting/example-cp"/>
-    -->
+    <filter root="/apps/sling/scripting/example-cp"/>
     <filter root="/content/bundled-scripts/example-cp"/>
 </workspaceFilter>
