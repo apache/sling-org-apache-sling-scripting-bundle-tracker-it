@@ -62,3 +62,31 @@
         <type>String</type>
     </property>
 </node>
+<node>
+<name>script-matching-no-version</name>
+<primaryNodeType>nt:unstructured</primaryNodeType>
+<property>
+    <name>sling:resourceType</name>
+    <value>org.apache.sling.scripting.examplebundle.scriptmatching.noversion/testpost</value>
+    <type>String</type>
+</property>
+</node>
+<node>
+<name>script-matching-no-version-main</name>
+<primaryNodeType>nt:unstructured</primaryNodeType>
+<property>
+    <name>sling:resourceType</name>
+    <value>org.apache.sling.scripting.examplebundle.scriptmatching.noversion/testmainpost</value>
+    <type>String</type>
+</property>
+</node>
+<node>
+<name>script-matching-no-version-mainselector</name>
+<primaryNodeType>nt:unstructured</primaryNodeType>
+<property>
+    <name>sling:resourceType</name>
+    <value>org.apache.sling.scripting.examplebundle.scriptmatching.noversion/testmainselectorpost</value>
+    <type>String</type>
+</property>
+</node>
+

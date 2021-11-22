@@ -91,7 +91,13 @@ public abstract class AbstractEndpointTestBase {
     }
 
     protected SlingHttpResponse getResponse(String method, String url, NameValuePair... parameters) throws Exception {
-        String resourcePath = url.substring(0, url.indexOf('.'));
+        int idx = url.indexOf('.');
+        String resourcePath;
+        if (idx != -1) {
+            resourcePath = url.substring(0, idx);
+        } else {
+            resourcePath = url;
+        }
         if (!resourceAlreadyPresent.contains(resourcePath)) {
             SLING_INSTANCE_RULE.getAdminClient().waitExists(resourcePath, contentFindTimeout, contentFindRetryDelay);
             resourceAlreadyPresent.add(resourcePath);
