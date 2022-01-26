@@ -28,6 +28,7 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -87,6 +88,29 @@ public class ExampleBundlePrecompiledTeleportedIT extends AbstractTeleportedTest
                             child.getResourceSuperType());
                 }
             }
+        }
+    }
+
+    /*
+     * We need to test that if we register with an absolute resource type and a relative one we are not ending up with
+     * a registration in the wrong prefix. As an example, when we register a resource type called rtsuper we end up with a capability
+     * for [rtsuper,/apps/rtsuper]. That will make it so that the resolver prepends the search path prefix (which is configurable).
+     * For a default configuration, this could end up being /apps/rtsuper or /libs/rtsuper, based on the prefix value, which is a mistake
+     * because, in that case, the resource super type would be on both and could cause a cycle.
+     *
+     * To recreate this scenario without changing the resolver config for the prefix selection this test has the script in
+     * /apps and the extends in /libs with a value for /apps/rtsuper - hence, we expect that we are not finding a super type
+     * on the script in /apps because otherwise it would have picked the wrong prefix (which we avoid by not registering
+     * relative resource types when there is an absolute one for the same resource type).
+     */
+    @Test
+    public void testRtSuper() throws LoginException {
+        final String expectedRT = "rtsuper";
+        ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
+        try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
+            Resource main = resolver.resolve("/apps/" + expectedRT);
+            assertNotNull(main);
+            assertNull(main.getResourceSuperType());
         }
     }
 }
