@@ -133,6 +133,23 @@ public class ScriptMatchIT extends AbstractEndpointTestBase {
                 ".scriptmatching/1.0.0/selector-2.html"));
     }
 
+    /*
+     * We need to test that we don't override the default GET servlet for resource types without a script
+     * This scenario can happen when we extend a resource type without providing a script ourself
+     * in this case, the registration should not override the default servlets for the none default extension.
+     * In other words, in this case, only the default extension should be handled by the resource super type -
+     * all other extensions should be handled by the default servlet.
+     */
+    @Test
+    public void testDefaultGETServlet() throws Exception {
+        // First test that the default extension is handled by the super type
+        Document document = getDocument(SCRIPT_MATCHING_BASE + "-no-version-rtsuper.html");
+        assertTrue(document.html().contains("/libs/rtsuper"));
+        // and now test that the none default json extension is not handled by it
+        document = getDocument(SCRIPT_MATCHING_BASE + "-no-version-rtsuper.json");
+        assertTrue(!document.html().contains("/libs/rtsuper"));
+    }
+
     private void testHttpMethodScriptMatching(String url, String httpMethod) throws Exception {
         Document document = getDocument(url, httpMethod);
         String path = url.substring(url.lastIndexOf('/'));
