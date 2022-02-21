@@ -89,4 +89,13 @@
     <type>String</type>
 </property>
 </node>
+<node>
+<name>script-matching-no-version-rtsuper</name>
+<primaryNodeType>nt:unstructured</primaryNodeType>
+<property>
+    <name>sling:resourceType</name>
+    <value>rtsuper</value>
+    <type>String</type>
+</property>
+</node>
 
