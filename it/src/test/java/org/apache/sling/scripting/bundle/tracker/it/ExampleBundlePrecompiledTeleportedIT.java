@@ -30,6 +30,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -111,6 +112,20 @@ public class ExampleBundlePrecompiledTeleportedIT extends AbstractTeleportedTest
             Resource main = resolver.resolve("/apps/" + expectedRT);
             assertNotNull(main);
             assertNull(main.getResourceSuperType());
+        }
+    }
+
+    @Test
+    public void testRt() throws LoginException {
+        final String expectedRT = "rt";
+        ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
+        try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
+            Resource apps = resolver.resolve("/apps/" + expectedRT + "/rt.html");
+            assertTrue(Resource.RESOURCE_TYPE_NON_EXISTING.equals(apps.getResourceType()));
+
+            Resource libs = resolver.resolve("/libs/" + expectedRT + "/rt.html");
+            assertFalse(Resource.RESOURCE_TYPE_NON_EXISTING.equals(libs.getResourceType()));
+            assertEquals("BundledScriptServlet (/libs/rt/rt.html)", libs.getValueMap().get("servletName"));
         }
     }
 }

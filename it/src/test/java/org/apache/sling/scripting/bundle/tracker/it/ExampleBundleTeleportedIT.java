@@ -28,7 +28,6 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -113,20 +112,6 @@ public class ExampleBundleTeleportedIT extends AbstractTeleportedTestBase {
                 assertEquals(child.getPath() + " does not have the expected resource super type", "sling/bundle/resource",
                         child.getResourceSuperType());
             }
-        }
-    }
-
-    @Test
-    public void testRt() throws LoginException {
-        final String expectedRT = "rt";
-        ResourceResolverFactory resourceResolverFactory = teleporter.getService(ResourceResolverFactory.class);
-        try (ResourceResolver resolver = resourceResolverFactory.getResourceResolver(AUTH_MAP)) {
-            Resource apps = resolver.resolve("/apps/" + expectedRT + "/rt.html");
-            assertTrue(Resource.RESOURCE_TYPE_NON_EXISTING.equals(apps.getResourceType()));
-
-            Resource libs = resolver.resolve("/libs/" + expectedRT + "/rt.html");
-            assertFalse(Resource.RESOURCE_TYPE_NON_EXISTING.equals(libs.getResourceType()));
-            assertEquals("BundledScriptServlet (/libs/rt/rt.html)", libs.getValueMap().get("servletName"));
         }
     }
 }
