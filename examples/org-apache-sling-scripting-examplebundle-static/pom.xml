@@ -20,45 +20,51 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <groupId>org.apache.sling</groupId>
-        <artifactId>sling</artifactId>
-        <version>34</version>
+        <artifactId>sling-bundle-parent</artifactId>
+        <version>41</version>
         <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>org.apache.sling.scripting.bundle.tracker.it.reactor</artifactId>
+    <artifactId>org.apache.sling.scripting.examplebundle.static</artifactId>
     <version>0.1.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>examples/org-apache-sling-scripting-examplebundle</module>
-        <module>examples/org-apache-sling-scripting-examplebundle-classic</module>
-        <module>examples/org-apache-sling-scripting-examplebundle-extend1</module>
-        <module>examples/org-apache-sling-scripting-examplebundle-extend2</module>
-        <module>examples/org-apache-sling-scripting-examplebundle-precompiled</module>
-        <module>examples/org-apache-sling-scripting-examplebundle-precompiled-extend1</module>
-        <module>examples/org-apache-sling-scripting-examplebundle-precompiled-jsp</module>
-        <module>examples/org-apache-sling-scripting-content-package-with-bundle-attached</module>
-        <module>examples/org-apache-sling-scripting-examplebundle-static</module>
-        <module>it</module>
-    </modules>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.rat</groupId>
-                <artifactId>apache-rat-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
-                <excludes combine.children="append">
-                        <exclude>**/*.md</exclude>
-                        <exclude>*/target/**</exclude>
-                        <exclude>**/*.iml</exclude>
-                </excludes>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
+<plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-baseline-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>            
+    <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-jar-plugin</artifactId>
+	<version>2.4</version>
+	<configuration>
+	  <archive>
+	    <manifestEntries>
+<Provide-Capability>sling.servlet;sling.servlet.resourceTypes:List&lt;String&gt;=&quot;/libs/rt,rt&quot;;scriptEngine=htl;scriptExtension=html</Provide-Capability>
+<Require-Capability>osgi.extender;filter:=&quot;(&amp;(osgi.extender=sling.scripting)(version>=1.0.0)(!(version>=2.0.0)))&quot;</Require-Capability>
+	    </manifestEntries>
+	  </archive>
+	</configuration>
+        </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+    </dependencies>
 
 </project>
