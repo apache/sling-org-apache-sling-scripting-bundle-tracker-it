@@ -30,6 +30,13 @@
         allow   jcr:read	on /content
     end
 
+# SLING-9735 - Define service user and ACLs for jcr.contentloader >>>
+#<<< SLING-9809 - Define service user and ACLs for jcr.usermanager
+create service user sling-jcr-usermanager
+set ACL for sling-jcr-usermanager
+    allow jcr:read,jcr:readAccessControl,jcr:modifyAccessControl,rep:write,rep:userManagement on /home
+end
+
     # sling-mapping
     create service user sling-mapping
 

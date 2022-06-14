@@ -35,3 +35,21 @@
     <type>String</type>
 </property>
 </node>
+<node>
+    <name>sling-11508-level-2</name>
+    <primaryNodeType>nt:unstructured</primaryNodeType>
+    <property>
+        <name>sling:resourceType</name>
+        <value>level-2/components/page</value>
+        <type>String</type>
+    </property>
+</node>
+<node>
+    <name>sling-11508-level-3</name>
+    <primaryNodeType>nt:unstructured</primaryNodeType>
+    <property>
+        <name>sling:resourceType</name>
+        <value>level-3/components/page</value>
+        <type>String</type>
+    </property>
+</node>

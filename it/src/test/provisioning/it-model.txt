@@ -48,5 +48,3 @@
   org.apache.sling.engine.impl.SlingMainServlet
     sling.trace.allow=B"true"
 
-  org.apache.sling.servlets.resolver.SlingServletResolver
-    servletresolver.mountProviders=B"false"
