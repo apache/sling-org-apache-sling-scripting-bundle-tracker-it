@@ -77,4 +77,11 @@ public class ExampleBundlePrecompiledExtend1IT extends AbstractEndpointTestBase 
         assertEquals("World", w.html());
         assertEquals(expectedRT, w.attr(DATA_RT_ATTRIBUTE));
     }
+
+    @Test
+    public void testSling11508Level3() throws Exception {
+        Document document = getDocument(ROOT + "/sling-11508-level-3.html");
+        Elements body = document.select("body");
+        assertEquals("It works!", body.html());
+    }
 }
