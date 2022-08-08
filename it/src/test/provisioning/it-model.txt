@@ -21,6 +21,9 @@
 
 # Dependencies
 [artifacts]
+  org.apache.sling/org.apache.sling.api
+  org.apache.sling/org.apache.sling.resourceresolver
+  org.apache.sling/org.apache.sling.engine
   org.apache.sling/org.apache.sling.scripting.spi
   org.apache.sling/org.apache.sling.servlets.resolver
   org.apache.sling/org.apache.sling.scripting.core
